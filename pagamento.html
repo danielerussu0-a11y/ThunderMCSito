@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>🎃 ThunderMC — Pagamento</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .payment-hero {
+            padding: 75px 6% 40px;
+            text-align: center;
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(255,140,0,.14),
+                    transparent 65%
+                );
+        }
+
+        .payment-emoji {
+            font-size: 60px;
+        }
+
+        .payment-hero h1 {
+            font-size: clamp(42px, 7vw, 70px);
+        }
+
+        .payment-hero h1 span {
+            color: #ff8c00;
+        }
+
+        .payment-hero p {
+            color: #999;
+            font-size: 18px;
+            margin-top: 12px;
+        }
+
+        .checkout {
+            max-width: 1100px;
+            margin: auto;
+            padding: 30px 6% 100px;
+            display: grid;
+            grid-template-columns: 1.25fr .85fr;
+            gap: 25px;
+        }
+
+        .checkout-card {
+            padding: 30px;
+            background:
+                linear-gradient(
+                    145deg,
+                    #151515,
+                    #0c0c0c
+                );
+            border: 1px solid #292929;
+            border-radius: 18px;
+        }
+
+        .checkout-card h2 {
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ddd;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+
+            width: 100%;
+            padding: 14px;
+
+            background: #090909;
+            border: 1px solid #292929;
+            border-radius: 9px;
+
+            color: white;
+            font-family: inherit;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+
+            border-color: #ff8c00;
+
+            box-shadow:
+                0 0 0 2px
+                rgba(255,140,0,.08);
+        }
+
+        /* =========================
+           METODI
+        ========================= */
+
+        .methods {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 12px;
+
+            margin-top: 10px;
+        }
+
+        .method {
+            position: relative;
+        }
+
+        .method input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .method label {
+
+            display: block;
+
+            padding: 18px;
+
+            text-align: center;
+
+            background: #0b0b0b;
+
+            border: 1px solid #292929;
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            transition: .3s;
+        }
+
+        .method label:hover {
+            border-color: #ff8c00;
+        }
+
+        .method input:checked + label {
+
+            border-color: #ff8c00;
+
+            background:
+                rgba(255,140,0,.08);
+
+            color: #ff8c00;
+        }
+
+        .method-icon {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        /* =========================
+           PAYPAL
+        ========================= */
+
+        .paypal-box,
+        .stripe-box {
+
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 25px;
+
+            border-radius: 14px;
+
+            background:
+                rgba(255,255,255,.03);
+
+            border:
+                1px solid #292929;
+
+            text-align: center;
+        }
+
+        .paypal-logo {
+            font-size: 32px;
+            font-weight: 900;
+            color: #4c9aff;
+        }
+
+        .stripe-logo {
+            font-size: 32px;
+            font-weight: 900;
+            color: #635bff;
+        }
+
+        .payment-info {
+            color: #888;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+
+        /* =========================
+           CARTA
+        ========================= */
+
+        .card-section {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .virtual-card {
+
+            position: relative;
+
+            min-height: 220px;
+
+            padding: 25px;
+
+            margin-bottom: 25px;
+
+            overflow: hidden;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #211000,
+                    #ff8c00 55%,
+                    #351500
+                );
+
+            box-shadow:
+                0 20px 50px
+                rgba(255,140,0,.20);
+
+            color: white;
+        }
+
+        .virtual-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 240px;
+            height: 240px;
+
+            right: -90px;
+            top: -100px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,.10);
+        }
+
+        .card-top {
+
+            position: relative;
+            z-index: 2;
+
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-brand {
+
+            font-size: 19px;
+            font-weight: 900;
+        }
+
+        .card-chip {
+
+            width: 48px;
+            height: 35px;
+
+            border-radius: 7px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f6d365,
+                    #c89425
+                );
+        }
+
+        .card-number {
+
+            position: relative;
+            z-index: 2;
+
+            margin-top: 35px;
+
+            font-size: 24px;
+
+            letter-spacing: 3px;
+
+            font-weight: 700;
+        }
+
+        .card-details {
+
+            position: relative;
+            z-index: 2;
+
+            display: flex;
+
+            gap: 40px;
+
+            margin-top: 22px;
+        }
+
+        .card-details div {
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-label {
+
+            font-size: 9px;
+            text-transform: uppercase;
+            opacity: .7;
+        }
+
+        .card-value {
+
+            margin-top: 4px;
+
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .card-pumpkin {
+
+            position: absolute;
+
+            right: 25px;
+            bottom: 20px;
+
+            z-index: 2;
+
+            font-size: 45px;
+        }
+
+        /* =========================
+           RIEPILOGO
+        ========================= */
+
+        .summary {
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-product {
+
+            padding: 20px;
+
+            background: #0b0b0b;
+
+            border: 1px solid #242424;
+
+            border-radius: 12px;
+
+            text-align: center;
+
+            margin-bottom: 20px;
+        }
+
+        .summary-icon {
+            font-size: 65px;
+        }
+
+        .summary-product h3 {
+            font-size: 25px;
+        }
+
+        .summary-product p {
+            color: #777;
+            margin-top: 5px;
+        }
+
+        .summary-line {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            padding: 12px 0;
+
+            border-bottom:
+                1px solid #202020;
+
+            color: #aaa;
+        }
+
+        .summary-total {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            padding-top: 20px;
+
+            font-size: 25px;
+
+            font-weight: 800;
+        }
+
+        .summary-total strong {
+            color: #ff8c00;
+        }
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .pay-btn {
+
+            width: 100%;
+
+            margin-top: 25px;
+
+            padding: 16px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #ff8c00;
+
+            color: #111;
+
+            font-family: inherit;
+
+            font-size: 17px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition: .3s;
+        }
+
+        .pay-btn:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 10px 30px
+                rgba(255,140,0,.3);
+        }
+
+        .paypal-btn {
+            background: #ffc439;
+        }
+
+        .stripe-btn {
+            background: #635bff;
+            color: white;
+        }
+
+        .secure {
+
+            margin-top: 20px;
+
+            padding: 15px;
+
+            text-align: center;
+
+            border-radius: 10px;
+
+            background:
+                rgba(255,255,255,.03);
+
+            color: #777;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+        @media (max-width: 800px) {
+
+            .checkout {
+                grid-template-columns: 1fr;
+            }
+
+            .summary {
+                position: static;
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .methods {
+                grid-template-columns: 1fr;
+            }
+
+            .checkout-card {
+                padding: 22px;
+            }
+
+            .card-number {
+                font-size: 18px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="navbar">
+
+    <div class="logo">
+        🎃 <span>ThunderMC</span>
+    </div>
+
+    <nav>
+
+        <a href="index.html">Home 🏡</a>
+        <a href="shop.html">Store 🛒</a>
+        <a href="regolamento.html">Regolamento 📜</a>
+        <a href="candidature.html">Candidature 📝</a>
+
+    </nav>
+
+    <a
+        href="login.html"
+        class="login-btn"
+    >
+        👤 Accedi
+    </a>
+
+</header>
+
+
+<section class="payment-hero">
+
+    <div class="payment-emoji">
+        💳
+    </div>
+
+    <h1>
+        PAGAMENTO
+        <span>THUNDERMC</span>
+    </h1>
+
+    <p>
+        Completa il tuo acquisto in modo semplice e sicuro.
+    </p>
+
+</section>
+
+
+<main class="checkout">
+
+
+<section class="checkout-card">
+
+    <h2>
+        📝 Dati dell'ordine
+    </h2>
+
+
+    <form id="paymentForm">
+
+
+        <div class="form-group">
+
+            <label>
+                🎮 Nome Minecraft
+            </label>
+
+            <input
+                type="text"
+                id="minecraft"
+                placeholder="Il tuo nickname Minecraft"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                📧 Email
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="La tua email"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+    <label for="product">🛒 Prodotto acquistato</label>
+
+    <select id="product" required>
+        <option value="">Seleziona un prodotto</option>
+
+        <!-- BUNDLE -->
+        <option value="Bundle God - 10 Key God" data-price="64.00">
+            🎁 Bundle God — €64,00
+        </option>
+
+        <option value="Bundle Raro" data-price="15.00">
+            💎 Bundle Raro — €15,00
+        </option>
+
+        <option value="Bundle Halloween" data-price="20.00">
+            🎃 Bundle Halloween — €20,00
+        </option>
+
+        <option value="Bundle Crypto" data-price="35.00">
+            ₿ Bundle Crypto — €35,00
+        </option>
+
+        <option value="Bundle Leggendario" data-price="50.00">
+            👑 Bundle Leggendario — €50,00
+        </option>
+
+        <!-- KEY -->
+        <option value="Key Drago" data-price="0">
+            🐉 Key Drago — Prezzo da definire
+        </option>
+
+        <option value="Key Xeno" data-price="5.00">
+            👽 Key Xeno — €5,00
+        </option>
+
+        <option value="Key God" data-price="8.00">
+            👑 Key God — €8,00
+        </option>
+
+        <option value="Key Ghost" data-price="0">
+            👻 Key Ghost — Prezzo da definire
+        </option>
+    </select>
+</div>
+
+
+        <h2 style="margin-top:30px;">
+            💳 Metodo di pagamento
+        </h2>
+
+
+        <div class="methods">
+
+
+            <div class="method">
+
+                <input
+                    type="radio"
+                    name="method"
+                    id="paypal"
+                    value="PayPal"
+                    required
+                >
+
+                <label for="paypal">
+
+                    <div class="method-icon">
+                        🅿️
+                    </div>
+
+                    PayPal
+
+                </label>
+
+            </div>
+
+
+            <div class="method">
+
+                <input
+                    type="radio"
+                    name="method"
+                    id="stripe"
+                    value="Stripe"
+                >
+
+                <label for="stripe">
+
+                    <div class="method-icon">
+                        💳
+                    </div>
+
+                    Stripe
+
+                </label>
+
+            </div>
+
+
+            <div class="method">
+
+                <input
+                    type="radio"
+                    name="method"
+                    id="mastercard"
+                    value="Mastercard"
+                >
+
+                <label for="mastercard">
+
+                    <div class="method-icon">
+                        🔴🟠
+                    </div>
+
+                    Mastercard
+
+                </label>
+
+            </div>
+
+
+            <div class="method">
+
+                <input
+                    type="radio"
+                    name="method"
+                    id="card"
+                    value="Carta"
+                >
+
+                <label for="card">
+
+                    <div class="method-icon">
+                        💳
+                    </div>
+
+                    Carta
+
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <!-- PAYPAL -->
+
+        <div
+            id="paypalSection"
+            class="paypal-box"
+        >
+
+            <div class="paypal-logo">
+                🅿️ PayPal
+            </div>
+
+            <p class="payment-info">
+                Verrai reindirizzato al checkout PayPal.
+            </p>
+
+            <button
+                type="button"
+                id="paypalButton"
+                class="pay-btn paypal-btn"
+            >
+                🅿️ CONTINUA CON PAYPAL
+            </button>
+
+        </div>
+
+
+        <!-- STRIPE -->
+
+        <div
+            id="stripeSection"
+            class="stripe-box"
+        >
+
+            <div class="stripe-logo">
+                💳 Stripe
+            </div>
+
+            <p class="payment-info">
+                Stripe permette di pagare con
+                Mastercard e altre carte supportate.
+            </p>
+
+            <button
+                type="button"
+                id="stripeButton"
+                class="pay-btn stripe-btn"
+            >
+                💳 CONTINUA CON STRIPE
+            </button>
+
+        </div>
+
+
+        <!-- CARTA / MASTERCARD -->
+
+        <div
+            id="cardSection"
+            class="card-section"
+        >
+
+            <div id="cartaVirtuale" class="virtual-card">
+
+    <div class="card-top">
+        <div class="card-brand">🎃 THUNDERMC</div>
+        <div class="card-chip"></div>
+    </div>
+
+    <div class="card-number">
+        •••• •••• •••• ••••
+    </div>
+
+    <div class="card-details">
+
+        <div>
+            <span class="card-label">Titolare</span>
+            <span class="card-value" id="nomeCarta">
+                NOME COGNOME
+            </span>
+        </div>
+
+        <div>
+            <span class="card-label">Scadenza</span>
+            <span class="card-value">
+                MM/AA
+            </span>
+        </div>
+
+    </div>
+
+    <div class="card-pumpkin">
+        🎃
+    </div>
+
+</div>
+
+
+            <p class="secure">
+                🔒 I dati della carta devono essere inseriti
+                esclusivamente nel checkout sicuro del provider.
+            </p>
+
+            <button
+                type="button"
+                id="cardButton"
+                class="pay-btn"
+            >
+                💳 CONTINUA CON IL PAGAMENTO
+            </button>
+
+        </div>
+
+
+    </form>
+
+</section>
+
+
+<!-- RIEPILOGO -->
+
+<aside class="checkout-card summary">
+
+    <h2>
+        🛒 Riepilogo
+    </h2>
+
+    <div class="summary-product">
+
+        <div
+            class="summary-icon"
+            id="summaryIcon"
+        >
+            🎃
+        </div>
+
+        <h3 id="summaryProduct">
+            Nessun prodotto
+        </h3>
+
+        <p>
+            ThunderMC Store
+        </p>
+
+    </div>
+
+    <div class="summary-line">
+
+        <span>
+            Prodotto
+        </span>
+
+        <span id="summaryPrice">
+            €0,00
+        </span>
+
+    </div>
+
+    <div class="summary-line">
+
+        <span>
+            Commissioni
+        </span>
+
+        <span>
+            €0,00
+        </span>
+
+    </div>
+
+    <div class="summary-total">
+
+        <span>
+            Totale
+        </span>
+
+        <strong id="totalPrice">
+            €0,00
+        </strong>
+
+    </div>
+
+    <div class="secure">
+
+        🔒 Checkout protetto.<br>
+        Il pagamento verrà elaborato
+        dal provider selezionato.
+
+    </div>
+
+</aside>
+
+
+</main>
+
+
+<footer>
+
+    <div class="footer-logo">
+        🎃 ThunderMC
+    </div>
+
+    <p>
+        © 2026 ThunderMC. Tutti i diritti riservati.
+    </p>
+
+</footer>
+
+
+<script>
+
+/* =========================
+   CONFIGURAZIONE PAGAMENTI
+========================= */
+
+/*
+ * INSERISCI QUI I TUOI LINK REALI.
+ *
+ * Non inserire password, API secret
+ * o dati della carta nel file HTML.
+ */
+
+const PAYPAL_URL =
+    "INSERISCI-QUI-LINK-PAYPAL";
+
+const STRIPE_URL =
+    "INSERISCI-QUI-LINK-STRIPE";
+
+
+/* =========================
+   ELEMENTI
+========================= */
+
+const product =
+    document.getElementById("product");
+
+const summaryProduct =
+    document.getElementById("summaryProduct");
+
+const summaryPrice =
+    document.getElementById("summaryPrice");
+
+const totalPrice =
+    document.getElementById("totalPrice");
+
+const summaryIcon =
+    document.getElementById("summaryIcon");
+
+const paypalSection =
+    document.getElementById("paypalSection");
+
+const stripeSection =
+    document.getElementById("stripeSection");
+
+const cardSection =
+    document.getElementById("cardSection");
+
+
+/* =========================
+   ⚡ ICONE THUNDERMC
+========================= */
+
+const icons = {
+
+    "Fungo": "🍄",
+    "Abisso": "🌑",
+    "Titan": "🗿",
+    "Stregone": "🧙",
+    "Zeus": "👑",
+
+    "Bundle God - 10 Key God": "🎁",
+    "Bundle Raro": "💎",
+    "Bundle Halloween": "🎃",
+    "Bundle Crypto": "₿",
+    "Bundle Leggendario": "👑",
+
+    "Key Drago": "🐉",
+    "Key Xeno": "👽",
+    "Key God": "👑",
+    "Key Ghost": "👻"
+};
+
+
+/* =========================
+   FORMAT PREZZO
+========================= */
+
+function formatPrice(price) {
+
+    return Number(price).toLocaleString(
+        "it-IT",
+        {
+            style: "currency",
+            currency: "EUR"
+        }
+    );
+
+}
+
+
+/* =========================
+   RIEPILOGO
+========================= */
+
+function aggiornaRiepilogo() {
+
+    const selected =
+        product.options[
+            product.selectedIndex
+        ];
+
+    if (!selected.value) {
+
+        summaryProduct.textContent =
+            "Nessun prodotto";
+
+        summaryPrice.textContent =
+            "€0,00";
+
+        totalPrice.textContent =
+            "€0,00";
+
+        summaryIcon.textContent =
+            "🎃";
+
+        return;
+    }
+
+    const price =
+        Number(selected.dataset.price);
+
+    summaryProduct.textContent =
+        selected.value;
+
+    summaryIcon.textContent =
+        icons[selected.value] || "🎃";
+
+    if (price <= 0) {
+
+        summaryPrice.textContent =
+            "Prezzo da definire";
+
+        totalPrice.textContent =
+            "Prezzo da definire";
+
+    } else {
+
+        summaryPrice.textContent =
+            formatPrice(price);
+
+        totalPrice.textContent =
+            formatPrice(price);
+
+    }
+
+}
+
+
+product.addEventListener(
+    "change",
+    aggiornaRiepilogo
+);
+
+
+/* =========================
+   PRODOTTO DALLA STORE
+========================= */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const prodottoURL =
+    params.get("prodotto");
+
+const prezzoURL =
+    params.get("prezzo");
+
+
+if (prodottoURL) {
+
+    for (
+        let i = 0;
+        i < product.options.length;
+        i++
+    ) {
+
+        if (
+            product.options[i].value
+                .toLowerCase() ===
+            prodottoURL.toLowerCase()
+        ) {
+
+            product.options[i].selected =
+                true;
+
+            if (prezzoURL) {
+
+                product.options[i]
+                    .dataset.price =
+                    prezzoURL;
+
+            }
+
+            break;
+        }
+
+    }
+
+    aggiornaRiepilogo();
+}
+
+
+/* =========================
+   METODO PAGAMENTO
+========================= */
+
+document
+    .querySelectorAll(
+        'input[name="method"]'
+    )
+    .forEach(function(input) {
+
+        input.addEventListener(
+            "change",
+            function() {
+
+                paypalSection.style.display =
+                    "none";
+
+                stripeSection.style.display =
+                    "none";
+
+                cardSection.style.display =
+                    "none";
+
+
+                if (
+                    this.value ===
+                    "PayPal"
+                ) {
+
+                    paypalSection.style.display =
+                        "block";
+
+                }
+
+
+                if (
+                    this.value ===
+                    "Stripe"
+                ) {
+
+                    stripeSection.style.display =
+                        "block";
+
+                }
+
+
+                if (
+                    this.value ===
+                    "Mastercard" ||
+                    this.value ===
+                    "Carta"
+                ) {
+
+                    cardSection.style.display =
+                        "block";
+
+                }
+
+            }
+        );
+
+    });
+
+
+/* =========================
+   CONTROLLA PRODOTTO
+========================= */
+
+function controllaProdotto() {
+
+    const selected =
+        product.options[
+            product.selectedIndex
+        ];
+
+    if (!selected.value) {
+
+        alert(
+            "🎃 ThunderMC\n\n" +
+            "Seleziona un prodotto."
+        );
+
+        return false;
+    }
+
+    const price =
+        Number(selected.dataset.price);
+
+    if (price <= 0) {
+
+        alert(
+            "🎃 ThunderMC\n\n" +
+            "Il prezzo di questo prodotto " +
+            "deve ancora essere configurato."
+        );
+
+        return false;
+    }
+
+    return true;
+}
+
+
+/* =========================
+   PAYPAL
+========================= */
+
+document
+    .getElementById("paypalButton")
+    .addEventListener(
+        "click",
+        function() {
+
+            if (!controllaProdotto()) {
+                return;
+            }
+
+            if (
+                !PAYPAL_URL.startsWith(
+                    "https://"
+                )
+            ) {
+
+                alert(
+                    "🎃 ThunderMC\n\n" +
+                    "Il checkout PayPal non è ancora configurato."
+                );
+
+                return;
+            }
+
+            window.location.href =
+                PAYPAL_URL;
+
+        }
+    );
+
+
+/* =========================
+   STRIPE
+========================= */
+
+document
+    .getElementById("stripeButton")
+    .addEventListener(
+        "click",
+        function() {
+
+            if (!controllaProdotto()) {
+                return;
+            }
+
+            if (
+                !STRIPE_URL.startsWith(
+                    "https://"
+                )
+            ) {
+
+                alert(
+                    "🎃 ThunderMC\n\n" +
+                    "Il checkout Stripe non è ancora configurato."
+                );
+
+                return;
+            }
+
+            window.location.href =
+                STRIPE_URL;
+
+        }
+    );
+
+
+/* =========================
+   MASTERCARD
+========================= */
+
+document
+    .getElementById("cardButton")
+    .addEventListener(
+        "click",
+        function() {
+
+            if (!controllaProdotto()) {
+                return;
+            }
+
+            alert(
+                "💳 Mastercard\n\n" +
+                "Il pagamento Mastercard " +
+                "verrà effettuato tramite " +
+                "il checkout sicuro del provider."
+            );
+
+        }
+    );
+
+
+</script>
+
+
+</body>
+
+</html>

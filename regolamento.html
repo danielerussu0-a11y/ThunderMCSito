@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>🎃 ThunderMC — Regolamento</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =========================
+           REGOLAMENTO
+        ========================= */
+
+        .rules-hero {
+
+            padding: 90px 6% 60px;
+
+            text-align: center;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(255,140,0,.12),
+                    transparent 65%
+                );
+
+        }
+
+        .rules-emoji {
+
+            font-size: 65px;
+
+            margin-bottom: 15px;
+
+        }
+
+        .rules-hero h1 {
+
+            font-size:
+                clamp(45px, 7vw, 75px);
+
+        }
+
+        .rules-hero h1 span {
+
+            color: #ff8c00;
+
+        }
+
+        .rules-hero p {
+
+            margin-top: 15px;
+
+            color: #999;
+
+            font-size: 18px;
+
+        }
+
+
+        /* CONTENITORE */
+
+        .rules-container {
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 30px 6% 100px;
+
+        }
+
+
+        /* AVVISO */
+
+        .rules-warning {
+
+            padding: 25px;
+
+            margin-bottom: 30px;
+
+            background:
+                rgba(255,140,0,.07);
+
+            border:
+                1px solid
+                rgba(255,140,0,.35);
+
+            border-radius: 15px;
+
+            text-align: center;
+
+        }
+
+        .rules-warning strong {
+
+            display: block;
+
+            color: #ff8c00;
+
+            font-size: 20px;
+
+            margin-bottom: 8px;
+
+        }
+
+        .rules-warning p {
+
+            color: #aaa;
+
+            line-height: 1.6;
+
+        }
+
+
+        /* SEZIONE */
+
+        .rules-section {
+
+            margin-bottom: 25px;
+
+            padding: 30px;
+
+            background: #111;
+
+            border:
+                1px solid #262626;
+
+            border-radius: 16px;
+
+            transition: .3s;
+
+        }
+
+        .rules-section:hover {
+
+            border-color:
+                rgba(255,140,0,.45);
+
+            transform:
+                translateY(-2px);
+
+        }
+
+
+        .rules-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 20px;
+
+        }
+
+        .rules-title .icon {
+
+            width: 45px;
+
+            height: 45px;
+
+            display: grid;
+
+            place-items: center;
+
+            background:
+                rgba(255,140,0,.1);
+
+            border-radius: 10px;
+
+            font-size: 22px;
+
+        }
+
+        .rules-title h2 {
+
+            font-size: 24px;
+
+            color: #fff;
+
+        }
+
+
+        /* LISTA */
+
+        .rules-list {
+
+            list-style: none;
+
+        }
+
+        .rules-list li {
+
+            position: relative;
+
+            padding:
+
+                11px
+                0
+                11px
+                28px;
+
+            color: #aaa;
+
+            line-height: 1.6;
+
+            border-bottom:
+                1px solid #1c1c1c;
+
+        }
+
+        .rules-list li:last-child {
+
+            border-bottom: none;
+
+        }
+
+        .rules-list li::before {
+
+            content: "🎃";
+
+            position: absolute;
+
+            left: 0;
+
+            top: 11px;
+
+        }
+
+
+        /* PUNIZIONI */
+
+        .punishments {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-top: 20px;
+
+        }
+
+        .punishment {
+
+            padding: 20px;
+
+            background: #0c0c0c;
+
+            border:
+                1px solid #242424;
+
+            border-radius: 12px;
+
+            text-align: center;
+
+        }
+
+        .punishment .emoji {
+
+            font-size: 30px;
+
+        }
+
+        .punishment h3 {
+
+            margin: 10px 0 5px;
+
+        }
+
+        .punishment p {
+
+            color: #777;
+
+            font-size: 14px;
+
+        }
+
+
+        /* ACCETTAZIONE */
+
+        .accept {
+
+            padding: 35px;
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #151515,
+                    #0b0b0b
+                );
+
+            border:
+                1px solid
+                rgba(255,140,0,.35);
+
+            border-radius: 18px;
+
+            margin-top: 40px;
+
+        }
+
+        .accept h2 {
+
+            color: #ff8c00;
+
+            margin-bottom: 12px;
+
+        }
+
+        .accept p {
+
+            color: #888;
+
+            line-height: 1.6;
+
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .rules-container {
+
+                padding-left: 5%;
+
+                padding-right: 5%;
+
+            }
+
+            .rules-section {
+
+                padding: 22px;
+
+            }
+
+            .punishments {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+
+        🎃 <span>ThunderMC</span>
+
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            Home 🏡
+        </a>
+
+        <a href="shop.html">
+            Store 🛒
+        </a>
+
+        <a
+            href="regolamento.html"
+            class="active"
+        >
+            Regolamento 📜
+        </a>
+
+        <a href="candidature.html">
+            Candidature 📝
+        </a>
+
+    </nav>
+
+
+    <a
+        href="login.html"
+        class="login-btn"
+    >
+        👤 Accedi
+    </a>
+
+</header>
+
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="rules-hero">
+
+    <div class="rules-emoji">
+        📜
+    </div>
+
+    <h1>
+
+        REGOLAMENTO
+        <span>THUNDERMC</span>
+
+    </h1>
+
+    <p>
+
+        Leggi attentamente tutte le regole
+        prima di entrare nella community.
+
+    </p>
+
+</section>
+
+
+
+<!-- =========================
+     REGOLE
+========================= -->
+
+<main class="rules-container">
+
+
+    <!-- AVVISO -->
+
+    <div class="rules-warning">
+
+        <strong>
+            ⚠️ IMPORTANTE
+        </strong>
+
+        <p>
+
+            Entrando e utilizzando i servizi
+            di ThunderMC accetti automaticamente
+            il presente regolamento.
+
+            La mancata conoscenza delle regole
+            non giustifica la loro violazione.
+
+        </p>
+
+    </div>
+
+
+
+    <!-- 1 -->
+
+    <section class="rules-section">
+
+        <div class="rules-title">
+
+            <div class="icon">
+                📌
+            </div>
+
+            <h2>
+                1. Regole Generali
+            </h2>
+
+        </div>
+
+
+        <ul class="rules-list">
+
+            <li>
+                È obbligatorio mantenere un comportamento
+                rispettoso verso tutti i giocatori.
+            </li>
+
+            <li>
+                Sono vietati insulti, molestie, minacce
+                e comportamenti tossici.
+            </li>
+
+            <li>
+                È vietato creare discussioni o provocare
+                intenzionalmente altri utenti.
+            </li>
+
+            <li>
+                È vietato impersonare membri dello Staff
+                o altri giocatori.
+            </li>
+
+            <li>
+                Non è consentito utilizzare nomi,
+                skin o contenuti offensivi.
+            </li>
+
+            <li>
+                È obbligatorio seguire le indicazioni
+                dello Staff.
+            </li>
+
+        </ul>
+
+    </section>
+
+
+
+    <!-- 2 -->
+
+    <section class="rules-section">
+
+        <div class="rules-title">
+
+            <div class="icon">
+                ⚔️
+            </div>
+
+            <h2>
+                2. Regole Minecraft
+            </h2>
+
+        </div>
+
+
+        <ul class="rules-list">
+
+            <li>
+                È vietato utilizzare cheat, hack,
+                client modificati illegali o vantaggi
+                non autorizzati.
+            </li>
+
+            <li>
+                Sono vietati autoclicker, macro e
+                programmi che automatizzano il gameplay,
+                quando non espressamente consentiti.
+            </li>
+
+            <li>
+                È vietato sfruttare bug o glitch
+                per ottenere vantaggi.
+            </li>
+
+            <li>
+                I bug devono essere segnalati allo Staff.
+            </li>
+
+            <li>
+                È vietato duplicare oggetti sfruttando
+                bug o malfunzionamenti.
+            </li>
+
+            <li>
+                È vietato danneggiare intenzionalmente
+                l'esperienza di gioco degli altri utenti.
+            </li>
+
+        </ul>
+
+    </section>
+
+
+
+    <!-- 3 -->
+
+    <section class="rules-section">
+
+        <div class="rules-title">
+
+            <div class="icon">
+                💬
+            </div>
+
+            <h2>
+                3. Chat e Comunicazione
+            </h2>
+
+        </div>
+
+
+        <ul class="rules-list">
+
+            <li>
+                È vietato utilizzare un linguaggio
+                eccessivamente offensivo.
+            </li>
+
+            <li>
+                È vietato fare spam o flood.
+            </li>
+
+            <li>
+                È vietato inviare pubblicità di altri
+                server o community senza autorizzazione.
+            </li>
+
+            <li>
+                È vietato diffondere informazioni personali
+                proprie o di altri utenti.
+            </li>
+
+            <li>
+                È vietato utilizzare la chat per
+                disturbare intenzionalmente gli altri.
+            </li>
+
+        </ul>
+
+    </section>
+
+
+
+    <!-- 4 -->
+
+    <section class="rules-section">
+
+        <div class="rules-title">
+
+            <div class="icon">
+                💰
+            </div>
+
+            <h2>
+                4. Store e Pagamenti
+            </h2>
+
+        </div>
+
+
+        <ul class="rules-list">
+
+            <li>
+                Gli acquisti devono essere effettuati
+                esclusivamente attraverso i canali ufficiali
+                di ThunderMC.
+            </li>
+
+            <li>
+                È vietato effettuare chargeback fraudolenti
+                o contestazioni false.
+            </li>
+
+            <li>
+                È vietato tentare di ottenere prodotti
+                gratuitamente attraverso bug o exploit.
+            </li>
+
+            <li>
+                Gli acquisti effettuati da un account
+                sono responsabilità del proprietario
+                dell'account.
+            </li>
+
+        </ul>
+
+    </section>
+
+
+
+    <!-- 5 -->
+
+    <section class="rules-section">
+
+        <div class="rules-title">
+
+            <div class="icon">
+                👮
+            </div>
+
+            <h2>
+                5. Staff
+            </h2>
+
+        </div>
+
+
+        <ul class="rules-list">
+
+            <li>
+                Lo Staff ha il compito di mantenere
+                l'ordine all'interno della community.
+            </li>
+
+            <li>
+                È vietato fingere di essere Staff.
+            </li>
+
+            <li>
+                È vietato molestare o provocare
+                intenzionalmente un membro dello Staff.
+            </li>
+
+            <li>
+                Eventuali problemi con un provvedimento
+                devono essere segnalati attraverso
+                i canali ufficiali.
+            </li>
+
+            <li>
+                Lo Staff può intervenire anche in caso
+                di comportamenti non esplicitamente
+                descritti nel regolamento quando
+                compromettono la community.
+            </li>
+
+        </ul>
+
+    </section>
+
+
+
+    <!-- 6 -->
+
+    <section class="rules-section">
+
+        <div class="rules-title">
+
+            <div class="icon">
+                🔒
+            </div>
+
+            <h2>
+                6. Account e Sicurezza
+            </h2>
+
+        </div>
+
+
+        <ul class="rules-list">
+
+            <li>
+                Non condividere mai la password del
+                proprio account.
+            </li>
+
+            <li>
+                È vietato utilizzare account rubati
+                o ottenuti illegalmente.
+            </li>
+
+            <li>
+                È vietato tentare di accedere agli
+                account di altri utenti.
+            </li>
+
+            <li>
+                Qualsiasi problema di sicurezza deve
+                essere comunicato immediatamente
+                allo Staff.
+            </li>
+
+        </ul>
+
+    </section>
+
+
+
+    <!-- 7 -->
+
+    <section class="rules-section">
+
+        <div class="rules-title">
+
+            <div class="icon">
+                📢
+            </div>
+
+            <h2>
+                7. Pubblicità
+            </h2>
+
+        </div>
+
+
+        <ul class="rules-list">
+
+            <li>
+                È vietata la pubblicità non autorizzata
+                di server Minecraft.
+            </li>
+
+            <li>
+                È vietata la pubblicità di Discord,
+                Telegram, siti o community esterne
+                senza autorizzazione.
+            </li>
+
+            <li>
+                È vietato utilizzare messaggi privati
+                per effettuare pubblicità non autorizzata.
+            </li>
+
+        </ul>
+
+    </section>
+
+
+
+    <!-- 8 -->
+
+    <section class="rules-section">
+
+        <div class="rules-title">
+
+            <div class="icon">
+                🛡️
+            </div>
+
+            <h2>
+                8. Sicurezza e Privacy
+            </h2>
+
+        </div>
+
+
+        <ul class="rules-list">
+
+            <li>
+                Non condividere dati personali tuoi
+                o di altri utenti.
+            </li>
+
+            <li>
+                È vietato effettuare doxxing.
+            </li>
+
+            <li>
+                È vietato minacciare o ricattare altri utenti.
+            </li>
+
+            <li>
+                È vietato utilizzare informazioni private
+                ottenute senza autorizzazione.
+            </li>
+
+        </ul>
+
+    </section>
+
+
+
+    <!-- PUNIZIONI -->
+
+    <section class="rules-section">
+
+        <div class="rules-title">
+
+            <div class="icon">
+                ⚖️
+            </div>
+
+            <h2>
+                9. Sanzioni
+            </h2>
+
+        </div>
+
+
+        <p
+            style="
+                color:#888;
+                line-height:1.6;
+            "
+        >
+
+            Le sanzioni vengono applicate in base
+            alla gravità dell'infrazione e possono
+            variare a discrezione dello Staff.
+
+        </p>
+
+
+        <div class="punishments">
+
+
+            <div class="punishment">
+
+                <div class="emoji">
+                    ⚠️
+                </div>
+
+                <h3>
+                    Warn
+                </h3>
+
+                <p>
+                    Richiamo ufficiale.
+                </p>
+
+            </div>
+
+
+            <div class="punishment">
+
+                <div class="emoji">
+                    🔇
+                </div>
+
+                <h3>
+                    Mute
+                </h3>
+
+                <p>
+                    Limitazione della chat.
+                </p>
+
+            </div>
+
+
+            <div class="punishment">
+
+                <div class="emoji">
+                    🚫
+                </div>
+
+                <h3>
+                    Ban
+                </h3>
+
+                <p>
+                    Esclusione temporanea
+                    o permanente.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ACCETTAZIONE -->
+
+    <div class="accept">
+
+        <h2>
+            🎃 BUON DIVERTIMENTO!
+        </h2>
+
+        <p>
+
+            Il regolamento può essere modificato
+            in qualsiasi momento per migliorare
+            la sicurezza e l'esperienza della community.
+
+            È responsabilità dell'utente rimanere
+            aggiornato sulle eventuali modifiche.
+
+            <br><br>
+
+            Grazie per far parte di
+            <strong style="color:#ff8c00;">
+                🎃 ThunderMC 🎃
+            </strong>
+
+        </p>
+
+    </div>
+
+
+</main>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="footer-logo">
+        🎃 ThunderMC
+    </div>
+
+    <p>
+        © 2026 ThunderMC. Tutti i diritti riservati.
+    </p>
+
+    <div class="footer-links">
+
+        <a href="regolamento.html">
+            Regolamento
+        </a>
+
+        <a href="contatti.html">
+            Contatti
+        </a>
+
+        <a href="privacy.html">
+            Privacy
+        </a>
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>

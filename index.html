@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>🎃 ThunderMC — Server Minecraft</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- PARTICELLE -->
+    <div class="particles"></div>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+
+        <div class="logo">
+            🎃 <span>ThunderMC</span>
+        </div>
+
+        <nav>
+            <a href="index.html" class="active">Home 🏡</a>
+            <a href="shop.html">Store 🛒</a>
+            <a href="regolamento.html">Regolamento 📜</a>
+            <a href="candidature.html">Candidature 📝</a>
+        </nav>
+
+        <a href="login.html" class="login-btn">
+            👤 Accedi
+        </a>
+
+    </header>
+
+
+    <!-- HERO -->
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="badge">
+                    🎃 SERVER MINECRAFT
+                </div>
+
+                <h1>
+                    BENVENUTO SU
+                    <span>THUNDERMC</span>
+                </h1>
+
+                <p>
+                    Entra nel nostro mondo Minecraft, incontra nuovi
+                    giocatori e vivi un'esperienza indimenticabile.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <button class="primary-btn" onclick="copyIP()">
+                        🎮 GIOCA ORA
+                    </button>
+
+                    <a
+                        href="https://discord.gg/MjshbnTfMN"
+                        target="_blank"
+                        class="secondary-btn">
+                        💬 DISCORD
+                    </a>
+
+                </div>
+
+                <div class="server-ip">
+                    <span>IP SERVER</span>
+                    <strong id="serverIP">
+                        play.thundermc.eu
+                    </strong>
+                </div>
+
+            </div>
+
+            <div class="hero-pumpkin">
+                🎃
+            </div>
+
+        </section>
+
+
+        <!-- SERVER STATUS -->
+        <section class="status-section">
+
+            <div class="status-card">
+
+                <div class="status-icon">
+                    🟢
+                </div>
+
+                <div>
+                    <span>STATO SERVER</span>
+                    <h3>Online</h3>
+                </div>
+
+            </div>
+
+
+            <div class="status-card">
+
+                <div class="status-icon">
+                    👥
+                </div>
+
+                <div>
+                    <span>GIOCATORI ONLINE</span>
+                    <h3 id="players">
+                        100
+                    </h3>
+                </div>
+
+            </div>
+
+
+            <div class="status-card">
+
+                <div class="status-icon">
+                    🎮
+                </div>
+
+                <div>
+                    <span>VERSIONE</span>
+                    <h3>1.21+</h3>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ABOUT -->
+        <section class="about">
+
+            <div class="section-title">
+                <span>🎃</span>
+                <h2>SCOPRI THUNDERMC</h2>
+                <p>
+                    Un nuovo mondo sta aspettando proprio te.
+                </p>
+            </div>
+
+
+            <div class="features">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🌍
+                    </div>
+
+                    <h3>MONDO UNICO</h3>
+
+                    <p>
+                        Esplora un mondo pieno di avventure,
+                        costruzioni e sorprese.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        ⚔️
+                    </div>
+
+                    <h3>DIVERTIMENTO</h3>
+
+                    <p>
+                        Gioca con la community e partecipa
+                        alle nostre modalità.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        👑
+                    </div>
+
+                    <h3>COMMUNITY</h3>
+
+                    <p>
+                        Conosci nuovi giocatori e diventa
+                        parte della famiglia ThunderMC.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CTA -->
+        <section class="cta">
+
+            <div>
+
+                <span>🎃 SEI PRONTO?</span>
+
+                <h2>
+                    ENTRA NEL MONDO
+                    <strong>THUNDERMC</strong>
+                </h2>
+
+                <p>
+                    Copia l'IP e collegati subito al server.
+                </p>
+
+                <button class="primary-btn" onclick="copyIP()">
+                    🎮 COPIA IP
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div class="footer-logo">
+            🎃 ThunderMC
+        </div>
+
+        <p>
+            © 2026 ThunderMC. Tutti i diritti riservati.
+        </p>
+
+        <div class="footer-links">
+            <a href="regolamento.html">Regolamento</a>
+            <a href="contatti.html">Contatti</a>
+            <a href="privacy.html">Privacy</a>
+        </div>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

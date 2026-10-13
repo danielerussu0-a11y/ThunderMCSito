@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎃 ThunderMC — Candidature</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+.application-hero {
+    padding: 75px 6% 45px;
+    text-align: center;
+    background: radial-gradient(circle at center, rgba(255,140,0,.12), transparent 65%);
+}
+.application-emoji { font-size: 60px; }
+.application-hero h1 { font-size: clamp(38px, 7vw, 70px); }
+.application-hero h1 span, .application-title h2 span { color: #ff8c00; }
+.application-hero p {
+    max-width: 700px; margin: 15px auto 0;
+    color: #999; font-size: 17px; line-height: 1.7;
+}
+.roles {
+    max-width: 1100px; margin: auto; padding: 30px 6% 55px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+}
+.role-card {
+    padding: 25px; text-align: center; background: #111;
+    border: 1px solid #262626; border-radius: 16px; transition: .25s;
+}
+.role-card:hover { transform: translateY(-5px); border-color: #ff8c00; }
+.role-icon { font-size: 42px; margin-bottom: 12px; }
+.role-card h2 { font-size: 21px; margin-bottom: 9px; }
+.role-card p { color: #888; line-height: 1.6; }
+
+.application-section {
+    max-width: 900px; margin: auto; padding: 20px 6% 80px;
+}
+.application-box {
+    padding: 32px; background: linear-gradient(145deg,#151515,#0c0c0c);
+    border: 1px solid #292929; border-radius: 18px;
+}
+.application-title { text-align: center; margin-bottom: 30px; }
+.application-title h2 { font-size: clamp(26px,5vw,35px); }
+.application-title p { margin-top: 10px; color: #888; }
+
+.form-group { margin-bottom: 20px; }
+.form-group label {
+    display: block; margin-bottom: 8px; color: #ddd; font-weight: 600;
+}
+.form-group input, .form-group select, .form-group textarea {
+    box-sizing: border-box; width: 100%; padding: 14px 15px;
+    background: #0a0a0a; border: 1px solid #292929; border-radius: 9px;
+    color: white; font-family: inherit; font-size: 15px; outline: none;
+}
+.form-group input:focus, .form-group select:focus,
+.form-group textarea:focus {
+    border-color: #ff8c00; box-shadow: 0 0 0 2px rgba(255,140,0,.08);
+}
+.form-group textarea { min-height: 110px; resize: vertical; }
+.question-box {
+    padding: 22px; margin: 25px 0;
+    background: rgba(255,140,0,.035); border: 1px solid #393027;
+    border-radius: 14px;
+}
+.question-box h3 { color: #ff8c00; margin-bottom: 8px; }
+.question-box > p { color: #999; margin-bottom: 22px; line-height: 1.5; }
+.checkbox {
+    display: flex; gap: 10px; align-items: flex-start;
+    margin: 20px 0 25px; color: #999; font-size: 14px; line-height: 1.5;
+}
+.checkbox input { margin-top: 4px; accent-color: #ff8c00; }
+.submit-btn {
+    width: 100%; padding: 15px; border: 0; border-radius: 9px;
+    background: #ff8c00; color: #111; font-family: inherit;
+    font-size: 17px; font-weight: 800; cursor: pointer; transition: .25s;
+}
+.submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px #ff8c0033; }
+.success-message, .error-message {
+    display: none; margin-top: 20px; padding: 16px;
+    text-align: center; border-radius: 10px; line-height: 1.6;
+}
+.success-message { background: #22c55e12; border: 1px solid #22c55e55; color: #8cffab; }
+.error-message { background: #ef444412; border: 1px solid #ef444455; color: #ffaaaa; }
+.requirements {
+    max-width: 900px; margin: 0 auto 65px; padding: 0 6%;
+}
+.requirements-box {
+    padding: 28px; background: #111; border: 1px solid #262626; border-radius: 16px;
+}
+.requirements-box h2 { color: #ff8c00; margin-bottom: 15px; }
+.requirements-box ul { list-style: none; padding: 0; }
+.requirements-box li {
+    padding: 11px 0 11px 28px; position: relative; color: #999;
+    border-bottom: 1px solid #1c1c1c; line-height: 1.5;
+}
+.requirements-box li:last-child { border-bottom: 0; }
+.requirements-box li::before { content: "🎃"; position: absolute; left: 0; }
+@media(max-width:850px) { .roles { grid-template-columns: repeat(2,1fr); } }
+@media(max-width:600px) {
+    .roles { grid-template-columns: 1fr; }
+    .application-box { padding: 21px; }
+    .question-box { padding: 16px; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">🎃 <span>ThunderMC</span></div>
+    <nav>
+        <a href="index.html">Home 🏡</a>
+        <a href="shop.html">Store 🛒</a>
+        <a href="regolamento.html">Regolamento 📜</a>
+        <a href="candidature.html" class="active">Candidature 📝</a>
+    </nav>
+    <a href="login.html" class="login-btn">👤 Accedi</a>
+</header>
+
+<section class="application-hero">
+    <div class="application-emoji">👮</div>
+    <h1>CANDIDATURE <span>THUNDERMC</span></h1>
+    <p>
+        Vuoi entrare a far parte dello Staff di ThunderMC?
+        Seleziona il ruolo, rispondi alle domande specifiche
+        e raccontaci perché dovremmo scegliere te.
+    </p>
+</section>
+
+<section class="roles">
+    <div class="role-card">
+        <div class="role-icon">🛡️</div>
+        <h2>Moderatore</h2>
+        <p>Gestisci segnalazioni, chat, infrazioni e rispetto del regolamento.</p>
+    </div>
+    <div class="role-card">
+        <div class="role-icon">🎫</div>
+        <h2>Supporter</h2>
+        <p>Aiuta i giocatori, risolvi problemi e gestisci le richieste di assistenza.</p>
+    </div>
+    <div class="role-card">
+        <div class="role-icon">🔎</div>
+        <h2>SS — ScreenShare</h2>
+        <p>Gestisci controlli anti-cheat secondo le procedure e le regole del server.</p>
+    </div>
+    <div class="role-card">
+        <div class="role-icon">🏗️</div>
+        <h2>Builder</h2>
+        <p>Realizza lobby, mappe, spawn e costruzioni per il network.</p>
+    </div>
+    <div class="role-card">
+        <div class="role-icon">💻</div>
+        <h2>Developer</h2>
+        <p>Sviluppa plugin, sistemi e funzionalità per ThunderMC.</p>
+    </div>
+    <div class="role-card">
+        <div class="role-icon">🎨</div>
+        <h2>Designer</h2>
+        <p>Crea loghi, banner, icone e grafiche per la community.</p>
+    </div>
+    <div class="role-card">
+        <div class="role-icon">📹</div>
+        <h2>Content Creator</h2>
+        <p>Realizza video e contenuti per far conoscere ThunderMC.</p>
+    </div>
+</section>
+
+<section class="requirements">
+    <div class="requirements-box">
+        <h2>🎃 Requisiti generali</h2>
+        <ul>
+            <li>Comportamento maturo e rispettoso.</li>
+            <li>Conoscenza del ruolo per cui ti candidi.</li>
+            <li>Disponibilità e collaborazione con lo Staff.</li>
+            <li>Rispetto del regolamento ThunderMC.</li>
+            <li>Account Discord per comunicare con il team.</li>
+            <li>Risposte sincere e informazioni veritiere.</li>
+        </ul>
+    </div>
+</section>
+
+<section class="application-section">
+    <div class="application-box">
+        <div class="application-title">
+            <h2>📝 CANDIDATURA <span>UFFICIALE</span></h2>
+            <p>Le domande cambiano in base al ruolo selezionato.</p>
+        </div>
+
+        <form id="applicationForm">
+            <div class="form-group">
+                <label for="minecraft">👤 Nome Minecraft</label>
+                <input id="minecraft" name="minecraft" maxlength="32"
+                    placeholder="Il tuo nickname Minecraft" required>
+            </div>
+
+            <div class="form-group">
+                <label for="discord">💬 Username Discord</label>
+                <input id="discord" name="discord" maxlength="80"
+                    placeholder="Il tuo username Discord" required>
+            </div>
+
+            <div class="form-group">
+                <label for="age">🎂 Età</label>
+                <input type="number" id="age" name="age" min="13" max="99"
+                    placeholder="La tua età" required>
+            </div>
+
+            <div class="form-group">
+                <label for="role">🛡️ Ruolo desiderato</label>
+                <select id="role" name="role" required>
+                    <option value="">Seleziona un ruolo</option>
+                    <option value="Moderatore">🛡️ Moderatore</option>
+                    <option value="Supporter">🎫 Supporter</option>
+                    <option value="SS">🔎 SS — ScreenShare</option>
+                    <option value="Builder">🏗️ Builder</option>
+                    <option value="Developer">💻 Developer</option>
+                    <option value="Designer">🎨 Designer</option>
+                    <option value="Content Creator">📹 Content Creator</option>
+                </select>
+            </div>
+
+            <div id="roleQuestions" class="question-box" hidden>
+                <h3 id="questionsTitle">🎃 Domande specifiche</h3>
+                <p id="questionsDescription"></p>
+                <div id="questionsFields"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="motivation">🎃 Perché vuoi entrare in ThunderMC?</label>
+                <textarea id="motivation" name="motivation"
+                    placeholder="Parlaci della tua motivazione..." required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="availability">⏰ Disponibilità</label>
+                <textarea id="availability" name="availability"
+                    placeholder="In quali giorni e per quante ore sei disponibile?" required></textarea>
+            </div>
+
+            <label class="checkbox">
+                <input type="checkbox" id="accept" required>
+                <span>Dichiaro che le informazioni inserite sono veritiere e accetto il regolamento ufficiale di 🎃 ThunderMC 🎃.</span>
+            </label>
+
+            <button type="submit" class="submit-btn">🎃 INVIA CANDIDATURA</button>
+
+            <div class="success-message" id="successMessage" role="status">
+                ✅ Modulo compilato correttamente!<br>
+                Attenzione: questa versione dimostra il funzionamento del modulo,
+                ma non invia ancora la candidatura allo Staff.
+            </div>
+
+            <div class="error-message" id="errorMessage" role="alert">
+                ⚠️ Seleziona un ruolo e rispondi a tutte le domande obbligatorie.
+            </div>
+        </form>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-logo">🎃 ThunderMC</div>
+    <p>© 2026 ThunderMC. Tutti i diritti riservati.</p>
+    <div class="footer-links">
+        <a href="regolamento.html">Regolamento</a>
+        <a href="contatti.html">Contatti</a>
+        <a href="privacy.html">Privacy</a>
+    </div>
+</footer>
+
+<script>
+const roleQuestions = {
+    "Supporter": {
+        description: "Domande per valutare le tue capacità di assistenza ai giocatori.",
+        questions: [
+            { id: "support_exp", label: "🎫 Hai già lavorato come Supporter? Dove e per quanto tempo?", type: "textarea" },
+            { id: "support_problem", label: "🧩 Un giocatore non riesce a entrare nel server. Come lo aiuti?", type: "textarea" },
+            { id: "support_angry", label: "💬 Un utente è arrabbiato e ti insulta mentre chiedi di aiutarlo. Come reagisci?", type: "textarea" },
+            { id: "support_ticket", label: "📩 Come gestiresti un ticket a cui non sai rispondere?", type: "textarea" },
+            { id: "support_rules", label: "📚 Perché un Supporter deve conoscere il regolamento?", type: "textarea" }
+        ]
+    },
+    "SS": {
+        description: "Domande sul ruolo ScreenShare e sulla gestione responsabile dei controlli anti-cheat.",
+        questions: [
+            { id: "ss_exp", label: "🔎 Hai già esperienza nei controlli ScreenShare? Descrivila.", type: "textarea" },
+            { id: "ss_suspicion", label: "🚨 Come procederesti se un giocatore fosse segnalato per sospetti cheat?", type: "textarea" },
+            { id: "ss_consent", label: "🛡️ Perché un controllo deve seguire le procedure ufficiali e rispettare la privacy?", type: "textarea" },
+            { id: "ss_refusal", label: "⚖️ Come gestiresti un giocatore che rifiuta un controllo previsto dal regolamento?", type: "textarea" },
+            { id: "ss_evidence", label: "📋 Come documenteresti un controllo e riferiresti i risultati allo Staff?", type: "textarea" },
+            { id: "ss_knowledge", label: "💻 Quali strumenti e conoscenze tecniche possiedi per questo ruolo?", type: "textarea" }
+        ]
+    },
+    "Moderatore": {
+        description: "Domande sulla moderazione, sulle segnalazioni e sulle sanzioni.",
+        questions: [
+            { id: "mod_exp", label: "🛡️ Hai già moderato un server Minecraft o Discord? Raccontaci la tua esperienza.", type: "textarea" },
+            { id: "mod_hacker", label: "🚨 Come gestiresti una segnalazione contro un giocatore sospettato di usare cheat?", type: "textarea" },
+            { id: "mod_conflict", label: "⚖️ Due giocatori litigano in chat. Cosa fai?", type: "textarea" },
+            { id: "mod_friend", label: "🤝 Un tuo amico infrange il regolamento. Come ti comporti?", type: "textarea" },
+            { id: "mod_proof", label: "📋 Quali elementi controlleresti prima di applicare una sanzione?", type: "textarea" }
+        ]
+    },
+    "Builder": {
+        description: "Domande sulle tue capacità di costruzione e collaborazione.",
+        questions: [
+            { id: "build_exp", label: "🏗️ Da quanto tempo costruisci su Minecraft e quali build hai realizzato?", type: "textarea" },
+            { id: "build_style", label: "🧱 Quali stili di costruzione conosci meglio?", type: "textarea" },
+            { id: "build_tools", label: "🛠️ Sai usare WorldEdit, VoxelSniper o strumenti simili? Specifica quali.", type: "textarea" },
+            { id: "build_portfolio", label: "🖼️ Inserisci i link a screenshot o al tuo portfolio (se disponibile).", type: "url", required: false },
+            { id: "build_task", label: "🗺️ Come organizzeresti la creazione di una nuova lobby rispettando un tema e una scadenza?", type: "textarea" }
+        ]
+    },
+    "Developer": {
+        description: "Domande sulle tue competenze di programmazione e sviluppo.",
+        questions: [
+            { id: "dev_languages", label: "💻 Quali linguaggi di programmazione conosci e a quale livello?", type: "textarea" },
+            { id: "dev_plugins", label: "🔌 Hai già sviluppato plugin Minecraft? Descrivi un tuo progetto.", type: "textarea" },
+            { id: "dev_debug", label: "🐛 Un plugin genera un errore all'avvio. Come lo analizzi e lo risolvi?", type: "textarea" },
+            { id: "dev_versions", label: "⚙️ Per quali versioni Minecraft e API hai sviluppato?", type: "textarea" },
+            { id: "dev_links", label: "🔗 Inserisci i link a GitHub o ai tuoi progetti (se disponibili).", type: "url", required: false }
+        ]
+    },
+    "Designer": {
+        description: "Domande sulle tue competenze grafiche e sul tuo portfolio.",
+        questions: [
+            { id: "design_tools", label: "🎨 Quali programmi o applicazioni usi per creare grafiche?", type: "textarea" },
+            { id: "design_work", label: "🖌️ Che tipo di grafiche sai realizzare: loghi, banner, icone o altro?", type: "textarea" },
+            { id: "design_portfolio", label: "🖼️ Inserisci il link al tuo portfolio o ai tuoi lavori.", type: "url", required: false },
+            { id: "design_feedback", label: "💡 Come gestisci una richiesta di modifica da parte del team?", type: "textarea" }
+        ]
+    },
+    "Content Creator": {
+        description: "Domande sulla creazione di contenuti e sulla promozione del server.",
+        questions: [
+            { id: "creator_platforms", label: "📹 Su quali piattaforme pubblichi contenuti?", type: "textarea" },
+            { id: "creator_content", label: "🎬 Che tipo di video o contenuti realizzi?", type: "textarea" },
+            { id: "creator_links", label: "🔗 Inserisci i link ai tuoi canali o ai tuoi video.", type: "textarea" },
+            { id: "creator_schedule", label: "📅 Con quale frequenza puoi pubblicare contenuti per ThunderMC?", type: "textarea" },
+            { id: "creator_ideas", label: "💡 Quale contenuto realizzeresti per promuovere ThunderMC?", type: "textarea" }
+        ]
+    }
+};
+
+const form = document.getElementById("applicationForm");
+const roleSelect = document.getElementById("role");
+const roleQuestionsBox = document.getElementById("roleQuestions");
+const questionsTitle = document.getElementById("questionsTitle");
+const questionsDescription = document.getElementById("questionsDescription");
+const questionsFields = document.getElementById("questionsFields");
+const success = document.getElementById("successMessage");
+const error = document.getElementById("errorMessage");
+
+function renderRoleQuestions() {
+    const role = roleSelect.value;
+    const data = roleQuestions[role];
+
+    questionsFields.replaceChildren();
+    success.style.display = "none";
+    error.style.display = "none";
+
+    if (!data) {
+        roleQuestionsBox.hidden = true;
+        return;
+    }
+
+    roleQuestionsBox.hidden = false;
+    questionsTitle.textContent = "📝 Domande specifiche — " + role;
+    questionsDescription.textContent = data.description;
+
+    data.questions.forEach((question, index) => {
+        const group = document.createElement("div");
+        group.className = "form-group";
+
+        const label = document.createElement("label");
+        label.htmlFor = question.id;
+        label.textContent = question.label;
+
+        let input;
+        if (question.type === "textarea") {
+            input = document.createElement("textarea");
+            input.rows = 4;
+            input.placeholder = "Scrivi la tua risposta...";
+        } else {
+            input = document.createElement("input");
+            input.type = question.type;
+            input.placeholder = question.type === "url"
+                ? "https://..."
+                : "Scrivi la tua risposta...";
+        }
+
+        input.id = question.id;
+        input.name = question.id;
+        input.required = question.required !== false;
+        input.maxLength = 3000;
+
+        group.append(label, input);
+        questionsFields.appendChild(group);
+    });
+}
+
+roleSelect.addEventListener("change", renderRoleQuestions);
+
+form.addEventListener("submit", function(event) {
+    event.preventDefault();
+    success.style.display = "none";
+    error.style.display = "none";
+
+    if (!roleQuestions[roleSelect.value]) {
+        error.textContent = "⚠️ Seleziona un ruolo valido.";
+        error.style.display = "block";
+        return;
+    }
+
+    if (!form.reportValidity()) {
+        error.textContent = "⚠️ Controlla di aver compilato tutti i campi obbligatori.";
+        error.style.display = "block";
+        return;
+    }
+
+    /*
+      Questa versione mostra il funzionamento del modulo.
+      Per ricevere davvero le candidature serve collegare un backend
+      o un servizio di moduli e configurare la destinazione dei dati.
+    */
+    success.style.display = "block";
+    success.scrollIntoView({ behavior: "smooth", block: "center" });
+});
+</script>
+
+</body>
+</html>

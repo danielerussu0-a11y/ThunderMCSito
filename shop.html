@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>🎃 ThunderMC — Store</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .shop-page {
+
+            min-height: 100vh;
+
+            padding: 70px 20px 100px;
+
+            background:
+                radial-gradient(
+                    circle at 50% 10%,
+                    rgba(255,140,0,.12),
+                    transparent 45%
+                );
+        }
+
+
+        .shop-header {
+
+            text-align: center;
+
+            max-width: 800px;
+
+            margin: 0 auto 45px;
+        }
+
+
+        .shop-icon {
+
+            font-size: 65px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .shop-header h1 {
+
+            margin: 0;
+
+            font-size: 45px;
+
+            font-weight: 900;
+        }
+
+
+        .shop-header h1 span {
+
+            color: #ff8c00;
+        }
+
+
+        .shop-header p {
+
+            color: #999;
+
+            margin-top: 12px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           CATEGORIE
+        ========================= */
+
+        .categories {
+
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-bottom: 40px;
+        }
+
+
+        .category {
+
+            border: 1px solid #303030;
+
+            background: #111;
+
+            color: #aaa;
+
+            padding: 12px 20px;
+
+            border-radius: 10px;
+
+            font-family: inherit;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition: .25s;
+        }
+
+
+        .category:hover {
+
+            border-color: #ff8c00;
+
+            color: white;
+
+            transform: translateY(-2px);
+        }
+
+
+        .category.active {
+
+            background: #ff8c00;
+
+            border-color: #ff8c00;
+
+            color: #111;
+
+            box-shadow:
+                0 8px 25px
+                rgba(255,140,0,.2);
+        }
+
+
+        /* =========================
+           PRODOTTI
+        ========================= */
+
+        .products-grid {
+
+            max-width: 1200px;
+
+            margin: 0 auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 22px;
+        }
+
+
+        .store-product {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #171717,
+                    #0c0c0c
+                );
+
+            border: 1px solid #292929;
+
+            border-radius: 18px;
+
+            padding: 25px;
+
+            text-align: center;
+
+            position: relative;
+
+            overflow: hidden;
+
+            transition: .25s;
+        }
+
+
+        .store-product:hover {
+
+            transform: translateY(-6px);
+
+            border-color:
+                rgba(255,140,0,.65);
+
+            box-shadow:
+                0 18px 45px
+                rgba(0,0,0,.35);
+        }
+
+
+        .product-icon {
+
+            font-size: 55px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .product-name {
+
+            font-size: 23px;
+
+            font-weight: 900;
+
+            margin-bottom: 8px;
+        }
+
+
+        .product-description {
+
+            min-height: 45px;
+
+            color: #888;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+            margin-bottom: 20px;
+        }
+
+
+        .product-price {
+
+            font-size: 27px;
+
+            color: #ff8c00;
+
+            font-weight: 900;
+
+            margin-bottom: 18px;
+        }
+
+
+        .buy-button {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #ff8c00;
+
+            color: #111;
+
+            font-family: inherit;
+
+            font-weight: 900;
+
+            font-size: 15px;
+
+            cursor: pointer;
+
+            transition: .25s;
+        }
+
+
+        .buy-button:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(255,140,0,.25);
+        }
+
+
+        .product-badge {
+
+            position: absolute;
+
+            top: 15px;
+
+            left: 15px;
+
+            padding: 5px 9px;
+
+            border-radius: 7px;
+
+            background: #ff8c00;
+
+            color: #111;
+
+            font-size: 11px;
+
+            font-weight: 900;
+        }
+
+
+        .shop-security {
+
+            max-width: 900px;
+
+            margin: 50px auto 0;
+
+            padding: 22px;
+
+            text-align: center;
+
+            border: 1px solid #252525;
+
+            background: rgba(255,255,255,.02);
+
+            border-radius: 14px;
+
+            color: #888;
+
+            line-height: 1.6;
+        }
+
+
+        .shop-security strong {
+
+            color: #ddd;
+        }
+
+
+        @media (max-width: 950px) {
+
+            .products-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .shop-page {
+
+                padding:
+                    45px 15px 80px;
+            }
+
+
+            .shop-header h1 {
+
+                font-size: 34px;
+            }
+
+
+            .shop-icon {
+
+                font-size: 52px;
+            }
+
+
+            .categories {
+
+                display: grid;
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+
+            .category {
+
+                width: 100%;
+
+                padding: 11px 8px;
+
+                font-size: 13px;
+            }
+
+
+            .products-grid {
+
+                grid-template-columns: 1fr;
+
+                gap: 16px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+
+        🎃 <span>ThunderMC</span>
+
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            Home 🏡
+        </a>
+
+        <a
+            href="shop.html"
+            class="active"
+        >
+            Store 🛒
+        </a>
+
+        <a href="regolamento.html">
+            Regolamento 📜
+        </a>
+
+        <a href="candidature.html">
+            Candidature 📝
+        </a>
+
+    </nav>
+
+
+    <a
+        href="login.html"
+        class="login-btn"
+    >
+        👤 Accedi
+    </a>
+
+</header>
+
+
+<!-- =========================
+     SHOP
+========================= -->
+
+<main class="shop-page">
+
+
+    <section class="shop-header">
+
+        <div class="shop-icon">
+            🎃
+        </div>
+
+
+        <h1>
+
+            THUNDERMC
+            <span>STORE</span>
+
+        </h1>
+
+
+        <p>
+
+            Acquista rank, bundle e key
+            per migliorare la tua esperienza
+            su ThunderMC.
+
+        </p>
+
+    </section>
+
+
+    <!-- =====================
+         CATEGORIE
+    ====================== -->
+
+    <div class="categories">
+
+
+        <button
+            class="category active"
+            data-category="vip"
+        >
+            👑 VIP
+        </button>
+
+
+        <button
+            class="category"
+            data-category="bundle"
+        >
+            🎁 BUNDLE
+        </button>
+
+
+        <button
+            class="category"
+            data-category="key"
+        >
+            🔑 KEY
+        </button>
+
+
+    </div>
+
+
+    <!-- =====================
+         PRODOTTI
+    ====================== -->
+
+    <section class="products-grid">
+
+
+        <!-- =====================
+             VIP
+        ====================== -->
+
+        <article
+            class="store-product"
+            data-category="vip"
+        >
+
+            <span class="product-badge">
+                POPOLARE
+            </span>
+
+
+            <div class="product-icon">
+                🍄
+            </div>
+
+
+            <div class="product-name">
+                Fungo
+            </div>
+
+
+            <div class="product-description">
+                Rank VIP Fungo per il tuo account ThunderMC.
+            </div>
+
+
+            <div class="product-price">
+                €8,50
+            </div>
+
+
+            <button
+                class="buy-button"
+                onclick="acquista('Fungo', '8.50')"
+            >
+                🛒 ACQUISTA
+            </button>
+
+        </article>
+
+
+        <article
+            class="store-product"
+            data-category="vip"
+        >
+
+            <div class="product-icon">
+                🌑
+            </div>
+
+
+            <div class="product-name">
+                Abisso
+            </div>
+
+
+            <div class="product-description">
+                Rank Abisso per il tuo account ThunderMC.
+            </div>
+
+
+            <div class="product-price">
+                €15,00
+            </div>
+
+
+            <button
+                class="buy-button"
+                onclick="acquista('Abisso', '15.00')"
+            >
+                🛒 ACQUISTA
+            </button>
+
+        </article>
+
+
+        <article
+            class="store-product"
+            data-category="vip"
+        >
+
+            <div class="product-icon">
+                🗿
+            </div>
+
+
+            <div class="product-name">
+                Titan
+            </div>
+
+
+            <div class="product-description">
+                Rank Titan per il tuo account ThunderMC.
+            </div>
+
+
+            <div class="product-price">
+                €20,00
+            </div>
+
+
+            <button
+                class="buy-button"
+                onclick="acquista('Titan', '20.00')"
+            >
+                🛒 ACQUISTA
+            </button>
+
+        </article>
+
+
+        <article
+            class="store-product"
+            data-category="vip"
+        >
+
+            <div class="product-icon">
+                🧙
+            </div>
+
+
+            <div class="product-name">
+                Stregone
+            </div>
+
+
+            <div class="product-description">
+                Rank Stregone per il tuo account ThunderMC.
+            </div>
+
+
+            <div class="product-price">
+                €35,00
+            </div>
+
+
+            <button
+                class="buy-button"
+                onclick="acquista('Stregone', '35.00')"
+            >
+                🛒 ACQUISTA
+            </button>
+
+        </article>
+
+
+        <article
+            class="store-product"
+            data-category="vip"
+        >
+
+            <span class="product-badge">
+                TOP
+            </span>
+
+
+            <div class="product-icon">
+                👑
+            </div>
+
+
+            <div class="product-name">
+                Zeus
+            </div>
+
+
+            <div class="product-description">
+                Il rank più prestigioso di ThunderMC.
+            </div>
+
+
+            <div class="product-price">
+                €50,00
+            </div>
+
+
+            <button
+                class="buy-button"
+                onclick="acquista('Zeus', '50.00')"
+            >
+                🛒 ACQUISTA
+            </button>
+
+        </article>
+
+
+        <!-- =====================
+             BUNDLE
+        ====================== -->
+
+        <article class="store-product" data-category="bundle">
+
+            <span class="product-badge">
+                BEST SELLER
+            </span>
+
+            <div class="product-icon">🎁</div>
+
+            <div class="product-name">
+                Bundle God
+            </div>
+
+            <div class="product-description">
+                Ottieni ben <strong>10 Key God</strong>
+                in un unico bundle.
+            </div>
+
+            <div class="product-price">€64,00</div>
+
+            <button
+                class="buy-button"
+                onclick="acquista('Bundle God - 10 Key God', '64.00')"
+            >
+                🛒 ACQUISTA
+            </button>
+
+            <button
+                class="buy-button"
+                onclick="previewProdotto('Bundle God', 'Contiene 10 Key God.', '64,00 €')"
+            >
+                👁️ PREVIEW
+            </button>
+
+        </article>
+
+
+        <article class="store-product" data-category="bundle">
+
+            <span class="product-badge">OFFERTA</span>
+
+            <div class="product-icon">💎</div>
+
+            <div class="product-name">Bundle Raro</div>
+
+            <div class="product-description">
+                • 8 Key Rare<br>
+                • 2 Key Supreme<br>
+                • 4 Key Forniture<br>
+                • Piccone Drago<br>
+                • Gemma Rossa<br>
+                • Mazza della Gloria<br>
+                • €5 di credito shop
+            </div>
+
+            <div class="product-price">€15,00</div>
+
+            <button
+                class="buy-button"
+                onclick="acquista('Bundle Raro', '15.00')"
+            >
+                🛒 ACQUISTA
+            </button>
+
+            <button
+                class="buy-button"
+                onclick="previewProdotto('Bundle Raro', '8 Key Rare, 2 Key Supreme, 4 Key Forniture, Piccone Drago, Gemma Rossa, Mazza della Gloria e 5 euro di credito shop.', '15,00 €')"
+            >
+                👁️ PREVIEW
+            </button>
+
+        </article>
+
+
+        <article class="store-product" data-category="bundle">
+
+            <div class="product-icon">🎃</div>
+
+            <div class="product-name">Bundle Halloween</div>
+
+            <div class="product-description">
+                Un bundle a tema Halloween con ricompense speciali.
+            </div>
+
+            <div class="product-price">€20,00</div>
+
+            <button
+                class="buy-button"
+                onclick="acquista('Bundle Halloween', '20.00')"
+            >
+                🛒 ACQUISTA
+            </button>
+
+            <button
+                class="buy-button"
+                onclick="previewProdotto('Bundle Halloween', 'Bundle a tema Halloween con ricompense speciali.', '20,00 €')"
+            >
+                👁️ PREVIEW
+            </button>
+
+        </article>
+
+
+        <article class="store-product" data-category="bundle">
+
+            <div class="product-icon">₿</div>
+
+            <div class="product-name">Bundle Crypto</div>
+
+            <div class="product-description">
+                Un bundle esclusivo per i giocatori di ThunderMC.
+            </div>
+
+            <div class="product-price">€35,00</div>
+
+            <button
+                class="buy-button"
+                onclick="acquista('Bundle Crypto', '35.00')"
+            >
+                🛒 ACQUISTA
+            </button>
+
+            <button
+                class="buy-button"
+                onclick="previewProdotto('Bundle Crypto', 'Bundle esclusivo per i giocatori di ThunderMC.', '35,00 €')"
+            >
+                👁️ PREVIEW
+            </button>
+
+        </article>
+
+
+        <article class="store-product" data-category="bundle">
+
+            <span class="product-badge">LEGENDARY</span>
+
+            <div class="product-icon">👑</div>
+
+            <div class="product-name">Bundle Leggendario</div>
+
+            <div class="product-description">
+                Un bundle leggendario con ricompense esclusive.
+            </div>
+
+            <div class="product-price">€50,00</div>
+
+            <button
+                class="buy-button"
+                onclick="acquista('Bundle Leggendario', '50.00')"
+            >
+                🛒 ACQUISTA
+            </button>
+
+            <button
+                class="buy-button"
+                onclick="previewProdotto('Bundle Leggendario', 'Bundle leggendario con ricompense esclusive.', '50,00 €')"
+            >
+                👁️ PREVIEW
+            </button>
+
+        </article>
+
+
+        <!-- =====================
+             KEY
+        ====================== -->
+
+        <article class="store-product" data-category="key">
+
+            <div class="product-icon">🐉</div>
+
+            <div class="product-name">Key Drago</div>
+
+            <div class="product-description">
+                Una Key Drago con ricompense speciali.
+            </div>
+
+            <div class="product-price">PREZZO DA DEFINIRE</div>
+
+            <button
+                class="buy-button"
+                onclick="acquista('Key Drago', '0.00')"
+            >
+                🛒 ACQUISTA
+            </button>
+
+        </article>
+
+
+        <article class="store-product" data-category="key">
+
+            <div class="product-icon">👽</div>
+
+            <div class="product-name">Key Xeno</div>
+
+            <div class="product-description">
+                Una Key Xeno con ricompense esclusive.
+            </div>
+
+            <div class="product-price">€5,00</div>
+
+            <button
+                class="buy-button"
+                onclick="acquista('Key Xeno', '5.00')"
+            >
+                🛒 ACQUISTA
+            </button>
+
+        </article>
+
+
+        <article class="store-product" data-category="key">
+
+            <span class="product-badge">RARA</span>
+
+            <div class="product-icon">👑</div>
+
+            <div class="product-name">Key God</div>
+
+            <div class="product-description">
+                La Key God con ricompense di alto livello.
+            </div>
+
+            <div class="product-price">€8,00</div>
+
+            <button
+                class="buy-button"
+                onclick="acquista('Key God', '8.00')"
+            >
+                🛒 ACQUISTA
+            </button>
+
+        </article>
+
+
+        <article class="store-product" data-category="key">
+
+            <span class="product-badge">SPECIALE</span>
+
+            <div class="product-icon">👻</div>
+
+            <div class="product-name">Key Ghost</div>
+
+            <div class="product-description">
+                Una Key Ghost con ricompense misteriose.
+            </div>
+
+            <div class="product-price">PREZZO DA DEFINIRE</div>
+
+            <button
+                class="buy-button"
+                onclick="acquista('Key Ghost', '0.00')"
+            >
+                🛒 ACQUISTA
+            </button>
+
+        </article>
+
+    </section>
+
+
+    <!-- =====================
+         SICUREZZA
+    ====================== -->
+
+    <div class="shop-security">
+
+        🔒
+        <strong>Acquisti sicuri</strong>
+
+        <br>
+
+        I pagamenti verranno elaborati tramite
+        sistemi di pagamento sicuri.
+        ThunderMC non memorizza i dati della tua carta.
+
+    </div>
+
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="footer-logo">
+        🎃 ThunderMC
+    </div>
+
+
+    <p>
+        © 2026 ThunderMC. Tutti i diritti riservati.
+    </p>
+
+
+    <div class="footer-links">
+
+        <a href="regolamento.html">
+            Regolamento
+        </a>
+
+        <a href="contatti.html">
+            Contatti
+        </a>
+
+        <a href="privacy.html">
+            Privacy
+        </a>
+
+    </div>
+
+</footer>
+
+
+<script>
+
+/* =========================
+   FILTRI
+========================= */
+
+const categories =
+    document.querySelectorAll(
+        ".category"
+    );
+
+
+const products =
+    document.querySelectorAll(
+        ".store-product"
+    );
+
+
+categories.forEach(category => {
+
+    category.addEventListener(
+        "click",
+        () => {
+
+            categories.forEach(
+                button => {
+
+                    button.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
+
+
+            category.classList.add(
+                "active"
+            );
+
+
+            const selected =
+                category.dataset.category;
+
+
+            products.forEach(product => {
+
+                if (
+                    product.dataset.category ===
+                    selected
+                ) {
+
+                    product.style.display =
+                        "block";
+
+                } else {
+
+                    product.style.display =
+                        "none";
+
+                }
+
+            });
+
+        }
+    );
+
+});
+
+
+/* =========================
+   ACQUISTA
+========================= */
+
+function acquista(
+    prodotto,
+    prezzo
+) {
+
+    if (prezzo === "0.00") {
+
+        alert(
+            "🎃 ThunderMC Store\n\n" +
+            "Il prezzo di questo prodotto " +
+            "deve ancora essere configurato."
+        );
+
+        return;
+    }
+
+
+    const url =
+        "pagamento.html" +
+        "?prodotto=" +
+        encodeURIComponent(
+            prodotto
+        ) +
+        "&prezzo=" +
+        encodeURIComponent(
+            prezzo
+        );
+
+
+    window.location.href = url;
+
+}
+
+
+/* =========================
+   MOSTRA VIP ALL'APERTURA
+========================= */
+
+products.forEach(product => {
+    if (product.dataset.category !== "vip") {
+        product.style.display = "none";
+    }
+});
+
+/* =========================
+   👁️ PREVIEW PRODOTTI
+========================= */
+
+function previewProdotto(nome, descrizione, prezzo) {
+    alert(
+        "👁️ PREVIEW PRODOTTO\n\n" +
+        nome + "\n\n" +
+        descrizione + "\n\n" +
+        "Prezzo: " + prezzo + " €"
+    );
+}
+
+</script>
+
+</body>
+</html>

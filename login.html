@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>🎃 ThunderMC — Accedi</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =========================
+           PAGINA LOGIN
+        ========================= */
+
+        .login-page {
+
+            min-height: calc(100vh - 80px);
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 70px 20px 100px;
+
+            background:
+                radial-gradient(
+                    circle at 50% 20%,
+                    rgba(255,140,0,.13),
+                    transparent 45%
+                );
+        }
+
+
+        /* =========================
+           CARD LOGIN
+        ========================= */
+
+        .login-card {
+
+            width: 100%;
+
+            max-width: 460px;
+
+            padding: 38px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #171717,
+                    #0b0b0b
+                );
+
+            border: 1px solid #292929;
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 25px 70px
+                rgba(0,0,0,.45);
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .login-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            top: -90px;
+            right: -90px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,140,0,.08);
+        }
+
+
+        /* =========================
+           LOGO
+        ========================= */
+
+        .login-logo {
+
+            text-align: center;
+
+            font-size: 58px;
+
+            margin-bottom: 8px;
+
+            position: relative;
+        }
+
+
+        .login-title {
+
+            text-align: center;
+
+            font-size: 32px;
+
+            font-weight: 900;
+
+            margin: 0;
+        }
+
+
+        .login-title span {
+
+            color: #ff8c00;
+        }
+
+
+        .login-subtitle {
+
+            text-align: center;
+
+            color: #888;
+
+            margin-top: 10px;
+
+            margin-bottom: 30px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .login-form-group {
+
+            margin-bottom: 19px;
+        }
+
+
+        .login-form-group label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #ddd;
+
+            font-weight: 700;
+        }
+
+
+        .input-wrapper {
+
+            position: relative;
+        }
+
+
+        .input-wrapper input {
+
+            width: 100%;
+
+            box-sizing: border-box;
+
+            padding: 14px 48px 14px 15px;
+
+            background: #090909;
+
+            color: white;
+
+            border: 1px solid #292929;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 15px;
+
+            transition: .25s;
+        }
+
+
+        .input-wrapper input:focus {
+
+            border-color: #ff8c00;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(255,140,0,.08);
+        }
+
+
+        .input-icon {
+
+            position: absolute;
+
+            right: 15px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #777;
+
+            pointer-events: none;
+        }
+
+
+        .password-toggle {
+
+            position: absolute;
+
+            right: 12px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            color: #888;
+
+            cursor: pointer;
+
+            font-size: 18px;
+
+            padding: 5px;
+        }
+
+
+        .password-toggle:hover {
+
+            color: #ff8c00;
+        }
+
+
+        /* =========================
+           OPTIONS
+        ========================= */
+
+        .login-options {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin: 5px 0 22px;
+
+            font-size: 13px;
+        }
+
+
+        .remember {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: #999;
+
+            cursor: pointer;
+        }
+
+
+        .remember input {
+
+            accent-color: #ff8c00;
+
+            cursor: pointer;
+        }
+
+
+        .forgot-link {
+
+            color: #ff8c00;
+
+            text-decoration: none;
+
+            cursor: pointer;
+        }
+
+
+        .forgot-link:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .login-submit {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #ff8c00;
+
+            color: #111;
+
+            font-family: inherit;
+
+            font-size: 16px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+            transition: .25s;
+        }
+
+
+        .login-submit:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 12px 30px
+                rgba(255,140,0,.28);
+        }
+
+
+        .login-submit:active {
+
+            transform:
+                translateY(0);
+        }
+
+
+        /* =========================
+           SEPARATORE
+        ========================= */
+
+        .divider {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin: 27px 0;
+
+            color: #555;
+
+            font-size: 13px;
+        }
+
+
+        .divider::before,
+        .divider::after {
+
+            content: "";
+
+            flex: 1;
+
+            height: 1px;
+
+            background: #292929;
+        }
+
+
+        /* =========================
+           REGISTER
+        ========================= */
+
+        .register-box {
+
+            text-align: center;
+
+            padding: 18px;
+
+            background:
+                rgba(255,255,255,.025);
+
+            border: 1px solid #242424;
+
+            border-radius: 12px;
+
+            color: #888;
+
+            font-size: 14px;
+        }
+
+
+        .register-button {
+
+            display: inline-block;
+
+            margin-top: 8px;
+
+            color: #ff8c00;
+
+            font-weight: 800;
+
+            text-decoration: none;
+
+            cursor: pointer;
+        }
+
+
+        .register-button:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           DISCORD
+        ========================= */
+
+        .discord-button {
+
+            width: 100%;
+
+            margin-top: 15px;
+
+            padding: 13px;
+
+            border-radius: 10px;
+
+            border: 1px solid #303030;
+
+            background: #111;
+
+            color: #ddd;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: .25s;
+        }
+
+
+        .discord-button:hover {
+
+            border-color: #5865F2;
+
+            color: #fff;
+        }
+
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal {
+
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 9999;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(0,0,0,.78);
+
+            backdrop-filter: blur(5px);
+        }
+
+
+        .modal.active {
+
+            display: flex;
+        }
+
+
+        .modal-box {
+
+            width: 100%;
+
+            max-width: 430px;
+
+            padding: 30px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #171717,
+                    #0b0b0b
+                );
+
+            border: 1px solid #303030;
+
+            border-radius: 18px;
+
+            position: relative;
+
+            box-shadow:
+                0 25px 70px
+                rgba(0,0,0,.6);
+        }
+
+
+        .modal-close {
+
+            position: absolute;
+
+            top: 12px;
+
+            right: 15px;
+
+            border: none;
+
+            background: transparent;
+
+            color: #777;
+
+            font-size: 25px;
+
+            cursor: pointer;
+        }
+
+
+        .modal-close:hover {
+
+            color: #ff8c00;
+        }
+
+
+        .modal-box h2 {
+
+            margin-bottom: 8px;
+        }
+
+
+        .modal-box p {
+
+            color: #888;
+
+            line-height: 1.5;
+
+            margin-bottom: 22px;
+        }
+
+
+        .modal-button {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #ff8c00;
+
+            color: #111;
+
+            font-weight: 900;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .login-page {
+
+                padding:
+                    45px 15px 80px;
+            }
+
+
+            .login-card {
+
+                padding: 28px 20px;
+
+                border-radius: 18px;
+            }
+
+
+            .login-logo {
+
+                font-size: 50px;
+            }
+
+
+            .login-title {
+
+                font-size: 27px;
+            }
+
+
+            .login-options {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                gap: 10px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+
+        🎃 <span>ThunderMC</span>
+
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            Home 🏡
+        </a>
+
+        <a href="shop.html">
+            Store 🛒
+        </a>
+
+        <a href="regolamento.html">
+            Regolamento 📜
+        </a>
+
+        <a href="candidature.html">
+            Candidature 📝
+        </a>
+
+    </nav>
+
+
+    <a
+        href="login.html"
+        class="login-btn"
+    >
+        👤 Accedi
+    </a>
+
+</header>
+
+
+<!-- =========================
+     LOGIN
+========================= -->
+
+<main class="login-page">
+
+
+    <section class="login-card">
+
+
+        <div class="login-logo">
+            🎃
+        </div>
+
+
+        <h1 class="login-title">
+
+            ACCEDI A
+            <span>THUNDERMC</span>
+
+        </h1>
+
+
+        <p class="login-subtitle">
+
+            Accedi al tuo account ThunderMC
+            per gestire i tuoi acquisti e il tuo profilo.
+
+        </p>
+
+
+        <!-- =====================
+             FORM LOGIN
+        ====================== -->
+
+        <form id="loginForm">
+
+
+            <div class="login-form-group">
+
+                <label for="loginEmail">
+                    📧 Email
+                </label>
+
+
+                <div class="input-wrapper">
+
+                    <input
+                        type="email"
+                        id="loginEmail"
+                        placeholder="La tua email"
+                        autocomplete="email"
+                        required
+                    >
+
+
+                    <span class="input-icon">
+                        📧
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="login-form-group">
+
+                <label for="loginPassword">
+                    🔒 Password
+                </label>
+
+
+                <div class="input-wrapper">
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="La tua password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        id="togglePassword"
+                        aria-label="Mostra password"
+                    >
+                        👁️
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="login-options">
+
+
+                <label class="remember">
+
+                    <input
+                        type="checkbox"
+                        id="remember"
+                    >
+
+                    Ricordami
+
+                </label>
+
+
+                <a
+                    href="#"
+                    class="forgot-link"
+                    id="forgotPassword"
+                >
+                    Password dimenticata?
+                </a>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="login-submit"
+            >
+
+                🔐 ACCEDI
+
+            </button>
+
+
+        </form>
+
+
+        <div class="divider">
+            oppure
+        </div>
+
+
+        <!-- =====================
+             REGISTRAZIONE
+        ====================== -->
+
+        <div class="register-box">
+
+            Non hai ancora un account?
+
+            <br>
+
+            <a
+                class="register-button"
+                id="openRegister"
+            >
+                📝 CREA ACCOUNT
+            </a>
+
+        </div>
+
+
+        <!-- =====================
+             DISCORD
+        ====================== -->
+
+        <button
+            type="button"
+            class="discord-button"
+            id="discordButton"
+        >
+
+            💬 Continua con Discord
+
+        </button>
+
+
+    </section>
+
+</main>
+
+
+<!-- =========================
+     MODAL REGISTRAZIONE
+========================= -->
+
+<div
+    class="modal"
+    id="registerModal"
+>
+
+    <div class="modal-box">
+
+
+        <button
+            class="modal-close"
+            id="closeRegister"
+            aria-label="Chiudi"
+        >
+            ×
+        </button>
+
+
+        <h2>
+            🎃 Crea il tuo account
+        </h2>
+
+
+        <p>
+            Crea un account ThunderMC
+            per accedere al tuo profilo.
+        </p>
+
+
+        <form id="registerForm">
+
+
+            <div class="login-form-group">
+
+                <label>
+                    👤 Nome Minecraft
+                </label>
+
+                <div class="input-wrapper">
+
+                    <input
+                        type="text"
+                        id="registerMinecraft"
+                        placeholder="Il tuo nickname"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="login-form-group">
+
+                <label>
+                    📧 Email
+                </label>
+
+                <div class="input-wrapper">
+
+                    <input
+                        type="email"
+                        id="registerEmail"
+                        placeholder="La tua email"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="login-form-group">
+
+                <label>
+                    🔒 Password
+                </label>
+
+                <div class="input-wrapper">
+
+                    <input
+                        type="password"
+                        id="registerPassword"
+                        placeholder="Crea una password"
+                        minlength="8"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="modal-button"
+            >
+
+                📝 CREA ACCOUNT
+
+            </button>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     MODAL PASSWORD
+========================= -->
+
+<div
+    class="modal"
+    id="forgotModal"
+>
+
+    <div class="modal-box">
+
+
+        <button
+            class="modal-close"
+            id="closeForgot"
+            aria-label="Chiudi"
+        >
+            ×
+        </button>
+
+
+        <h2>
+            🔑 Recupera password
+        </h2>
+
+
+        <p>
+            Inserisci la tua email.
+            Quando il sistema reale sarà collegato,
+            riceverai le istruzioni per recuperare
+            il tuo account.
+        </p>
+
+
+        <form id="forgotForm">
+
+
+            <div class="login-form-group">
+
+                <label>
+                    📧 Email
+                </label>
+
+                <div class="input-wrapper">
+
+                    <input
+                        type="email"
+                        id="forgotEmail"
+                        placeholder="La tua email"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="modal-button"
+            >
+
+                📩 INVIA RICHIESTA
+
+            </button>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="footer-logo">
+        🎃 ThunderMC
+    </div>
+
+
+    <p>
+        © 2026 ThunderMC. Tutti i diritti riservati.
+    </p>
+
+
+    <div class="footer-links">
+
+        <a href="regolamento.html">
+            Regolamento
+        </a>
+
+        <a href="contatti.html">
+            Contatti
+        </a>
+
+        <a href="privacy.html">
+            Privacy
+        </a>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+
+/* =========================
+   MOSTRA / NASCONDI PASSWORD
+========================= */
+
+const togglePassword =
+    document.getElementById(
+        "togglePassword"
+    );
+
+const loginPassword =
+    document.getElementById(
+        "loginPassword"
+    );
+
+
+togglePassword.addEventListener(
+    "click",
+    function() {
+
+        if (
+            loginPassword.type ===
+            "password"
+        ) {
+
+            loginPassword.type =
+                "text";
+
+            togglePassword.textContent =
+                "🙈";
+
+            togglePassword.setAttribute(
+                "aria-label",
+                "Nascondi password"
+            );
+
+        } else {
+
+            loginPassword.type =
+                "password";
+
+            togglePassword.textContent =
+                "👁️";
+
+            togglePassword.setAttribute(
+                "aria-label",
+                "Mostra password"
+            );
+        }
+
+    }
+);
+
+
+/* =========================
+   LOGIN DEMO
+========================= */
+
+document
+    .getElementById("loginForm")
+    .addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            const email =
+                document.getElementById(
+                    "loginEmail"
+                ).value.trim();
+
+
+            const password =
+                document.getElementById(
+                    "loginPassword"
+                ).value;
+
+
+            if (!email || !password) {
+
+                alert(
+                    "🎃 Inserisci email e password."
+                );
+
+                return;
+            }
+
+
+            alert(
+                "🎃 ThunderMC\n\n" +
+                "Interfaccia di login pronta!\n\n" +
+                "Il sistema account reale " +
+                "verrà collegato successivamente."
+            );
+
+        }
+    );
+
+
+/* =========================
+   REGISTRAZIONE MODAL
+========================= */
+
+const registerModal =
+    document.getElementById(
+        "registerModal"
+    );
+
+const openRegister =
+    document.getElementById(
+        "openRegister"
+    );
+
+const closeRegister =
+    document.getElementById(
+        "closeRegister"
+    );
+
+
+openRegister.addEventListener(
+    "click",
+    function() {
+
+        registerModal.classList.add(
+            "active"
+        );
+
+    }
+);
+
+
+closeRegister.addEventListener(
+    "click",
+    function() {
+
+        registerModal.classList.remove(
+            "active"
+        );
+
+    }
+);
+
+
+/* =========================
+   REGISTRAZIONE DEMO
+========================= */
+
+document
+    .getElementById("registerForm")
+    .addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            alert(
+                "🎃 ThunderMC\n\n" +
+                "Modulo di registrazione pronto!\n\n" +
+                "Il sistema account reale " +
+                "verrà collegato successivamente."
+            );
+
+        }
+    );
+
+
+/* =========================
+   PASSWORD DIMENTICATA
+========================= */
+
+const forgotModal =
+    document.getElementById(
+        "forgotModal"
+    );
+
+const forgotPassword =
+    document.getElementById(
+        "forgotPassword"
+    );
+
+const closeForgot =
+    document.getElementById(
+        "closeForgot"
+    );
+
+
+forgotPassword.addEventListener(
+    "click",
+    function(event) {
+
+        event.preventDefault();
+
+        forgotModal.classList.add(
+            "active"
+        );
+
+    }
+);
+
+
+closeForgot.addEventListener(
+    "click",
+    function() {
+
+        forgotModal.classList.remove(
+            "active"
+        );
+
+    }
+);
+
+
+/* =========================
+   RECUPERO DEMO
+========================= */
+
+document
+    .getElementById("forgotForm")
+    .addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            alert(
+                "📩 ThunderMC\n\n" +
+                "Richiesta ricevuta.\n\n" +
+                "Il recupero password reale " +
+                "verrà collegato successivamente."
+            );
+
+        }
+    );
+
+
+/* =========================
+   DISCORD
+========================= */
+
+document
+    .getElementById("discordButton")
+    .addEventListener(
+        "click",
+        function() {
+
+            window.location.href =
+                "https://discord.gg/MjshbnTfMN";
+
+        }
+    );
+
+
+/* =========================
+   CHIUSURA MODAL
+========================= */
+
+window.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target ===
+            registerModal
+        ) {
+
+            registerModal.classList.remove(
+                "active"
+            );
+
+        }
+
+
+        if (
+            event.target ===
+            forgotModal
+        ) {
+
+            forgotModal.classList.remove(
+                "active"
+            );
+
+        }
+
+    }
+);
+
+
+</script>
+
+
+</body>
+
+</html>
