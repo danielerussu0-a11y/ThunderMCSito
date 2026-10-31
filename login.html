@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080808">
+
+  <title>🎃 ThunderMC | Login</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --orange: #ff8c00;
+      --gold: #ffb52e;
+      --black: #080808;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-x: hidden;
+      background:
+        radial-gradient(ellipse at top, #482308 0%, #17100a 35%, #080808 75%);
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .12;
+      background-image: radial-gradient(#ff8c00 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+
+    .card {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      padding: 36px 26px 25px;
+      overflow: hidden;
+      text-align: center;
+      background: rgba(15, 15, 15, .97);
+      border: 1px solid #ff8c00;
+      border-radius: 22px;
+      box-shadow: 0 0 35px #ff8c0020;
+      animation: appear .6s ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 15%;
+      width: 70%;
+      height: 2px;
+      background: linear-gradient(
+        90deg, transparent, #ff8c00, #ffe0a3, #ff8c00, transparent
+      );
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 7px 13px;
+      margin-bottom: 18px;
+      border: 1px solid #ff8c004d;
+      border-radius: 30px;
+      background: #ff8c0012;
+      color: var(--gold);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .logo {
+      margin-bottom: 8px;
+      font-size: 66px;
+      filter: drop-shadow(0 0 15px #ff8c0066);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    h1 {
+      font-size: 34px;
+      font-weight: 1000;
+      letter-spacing: 2px;
+    }
+
+    h1 span {
+      color: var(--orange);
+      text-shadow: 0 0 15px #ff8c0040;
+    }
+
+    .subtitle {
+      margin: 12px 0 28px;
+      color: #999;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .subtitle strong {
+      color: var(--gold);
+    }
+
+    .line {
+      width: 60px;
+      height: 3px;
+      margin: 0 auto 26px;
+      border-radius: 10px;
+      background: linear-gradient(90deg, var(--orange), #ffe0a3);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-align: left;
+    }
+
+    .input-box {
+      position: relative;
+    }
+
+    .input-box span {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      font-size: 19px;
+      pointer-events: none;
+    }
+
+    input {
+      width: 100%;
+      padding: 16px 14px 16px 47px;
+      border: 1px solid #363636;
+      border-radius: 12px;
+      outline: none;
+      background: #090909;
+      color: #fff;
+      font-size: 16px;
+      transition: .25s;
+    }
+
+    input::placeholder {
+      color: #707070;
+    }
+
+    input:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 16px #ff8c0020;
+    }
+
+    .edition {
+      min-height: 55px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 16px;
+      padding: 13px;
+      border: 1px solid #303030;
+      border-radius: 12px;
+      background: #191919;
+      text-align: left;
+    }
+
+    .edition-icon {
+      font-size: 24px;
+    }
+
+    .edition-name {
+      color: #ffb52e;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .edition-description {
+      margin-top: 4px;
+      color: #888;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .edition.java {
+      border-color: #91662c;
+    }
+
+    .edition.bedrock {
+      border-color: #278d54;
+    }
+
+    .edition.bedrock .edition-name {
+      color: #68e69a;
+    }
+
+    .submit {
+      width: 100%;
+      margin-top: 20px;
+      padding: 16px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(100deg, #ff8c00, #ffc04d);
+      color: #111;
+      font-size: 14px;
+      font-weight: 1000;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 5px 20px #ff8c0020;
+      transition: .2s;
+    }
+
+    .submit:not(:disabled):hover {
+      transform: translateY(-2px);
+      filter: brightness(1.1);
+      box-shadow: 0 7px 25px #ff8c0040;
+    }
+
+    .submit:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .message {
+      display: none;
+      margin-top: 14px;
+      padding: 13px;
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.7;
+      text-align: left;
+      overflow-wrap: anywhere;
+    }
+
+    .security {
+      margin-top: 20px;
+      color: #777;
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    .security strong {
+      color: var(--orange);
+    }
+
+    footer {
+      margin-top: 23px;
+      padding-top: 17px;
+      border-top: 1px solid #292929;
+      color: #666;
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    footer strong {
+      color: var(--orange);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-3deg); }
+      50% { transform: translateY(-6px) rotate(3deg); }
+    }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 380px) {
+      .card { padding: 29px 18px 22px; }
+      h1 { font-size: 29px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="card">
+
+    <div class="tag">🎃 HALLOWEEN EDITION</div>
+
+    <div class="logo">🎃</div>
+
+    <h1>THUNDER<span>MC</span></h1>
+
+    <p class="subtitle">
+      Bentornato su <strong>ThunderMC</strong>!<br>
+      Accedi con il tuo nickname Minecraft.
+    </p>
+
+    <div class="line"></div>
+
+    <form id="loginForm" novalidate>
+      <label for="nickname">NICKNAME MINECRAFT</label>
+
+      <div class="input-box">
+        <span>👤</span>
+        <input
+          id="nickname"
+          name="nickname"
+          type="text"
+          placeholder="Es. Daniele oppure .Daniele"
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+          maxlength="17"
+          required
+        >
+      </div>
+
+      <div class="edition" id="editionBox">
+        <div class="edition-icon" id="editionIcon">🎮</div>
+        <div>
+          <div class="edition-name" id="editionName">THUNDERMC NETWORK</div>
+          <div class="edition-description" id="editionDescription">
+            Java senza punto · Bedrock con il punto iniziale
+          </div>
+        </div>
+      </div>
+
+      <button class="submit" id="submitButton" type="submit" disabled>
+        🎃 CONTINUA
+      </button>
+
+      <div class="message" id="message" role="status" aria-live="polite"></div>
+    </form>
+
+    <div class="security">
+      🛡️ <strong>THUNDERMC NETWORK</strong><br>
+      Accesso senza password
+    </div>
+
+    <footer>
+      © 2026 <strong>ThunderMC</strong><br>
+      Tutti i diritti riservati 🎃
+    </footer>
+
+  </main>
+
+  <script>
+    const form = document.getElementById("loginForm");
+    const nicknameInput = document.getElementById("nickname");
+    const editionBox = document.getElementById("editionBox");
+    const editionIcon = document.getElementById("editionIcon");
+    const editionName = document.getElementById("editionName");
+    const editionDescription = document.getElementById("editionDescription");
+    const submitButton = document.getElementById("submitButton");
+    const message = document.getElementById("message");
+
+    function showMessage(text, error = false) {
+      message.style.display = "block";
+      message.style.background = error ? "#421d1d" : "#382608";
+      message.style.color = error ? "#ffb3b3" : "#ffcc80";
+      message.textContent = text;
+    }
+
+    function detectEdition() {
+      const value = nicknameInput.value.trim();
+      const bedrock = value.startsWith(".");
+      const nickname = bedrock ? value.slice(1) : value;
+      const valid = /^[A-Za-z0-9_]{3,16}$/.test(nickname);
+
+      editionBox.classList.remove("java", "bedrock");
+
+      if (!value) {
+        editionIcon.textContent = "🎃";
+        editionName.textContent = "THUNDERMC NETWORK";
+        editionDescription.textContent =
+          "Java senza punto · Bedrock con il punto iniziale";
+      } else if (bedrock) {
+        editionIcon.textContent = "🟢";
+        editionName.textContent = "BEDROCK EDITION";
+        editionDescription.textContent = valid
+          ? "Nickname: " + nickname
+          : "Controlla il nickname inserito.";
+        editionBox.classList.add("bedrock");
+      } else {
+        editionIcon.textContent = "☕";
+        editionName.textContent = "JAVA EDITION";
+        editionDescription.textContent = valid
+          ? "Nickname: " + nickname
+          : "Controlla il nickname inserito.";
+        editionBox.classList.add("java");
+      }
+
+      submitButton.disabled = !valid;
+      message.style.display = "none";
+    }
+
+    nicknameInput.addEventListener("input", detectEdition);
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const value = nicknameInput.value.trim();
+      const bedrock = value.startsWith(".");
+      const nickname = bedrock ? value.slice(1) : value;
+
+      if (!/^[A-Za-z0-9_]{3,16}$/.test(nickname)) {
+        showMessage(
+          "❌ Nickname non valido. Usa da 3 a 16 caratteri: lettere, numeri e underscore.",
+          true
+        );
+        return;
+      }
+
+      showMessage(
+        "🎃 Nickname: " + nickname +
+        " · Edizione: " + (bedrock ? "Bedrock" : "Java") +
+        ".\n\nIl sistema di autenticazione deve ancora essere collegato. Questa pagina non verifica la proprietà del nickname."
+      );
+    });
+
+    detectEdition();
+  </script>
+</body>
+</html>

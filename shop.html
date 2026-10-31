@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#090909">
+    <title>🎃 ThunderMC - Store</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #090909;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        .shop-page {
+            min-height: 100vh;
+            padding: 70px 20px 100px;
+            background: radial-gradient(
+                circle at 50% 10%,
+                rgba(255, 140, 0, .12),
+                transparent 45%
+            );
+        }
+
+        .shop-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 45px;
+        }
+
+        .shop-icon {
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+
+        .shop-header h1 {
+            margin: 0;
+            font-size: 45px;
+            font-weight: 800;
+        }
+
+        .shop-header h1 span {
+            color: #ff8c00;
+        }
+
+        .shop-header p {
+            color: #999;
+            margin-top: 12px;
+            line-height: 1.7;
+        }
+
+        /* CATEGORIE */
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .category {
+            border: 1px solid #303030;
+            background: #111;
+            color: #aaa;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-family: inherit;
+            font-weight: 800;
+            cursor: pointer;
+            transition: .25s;
+        }
+
+        .category:hover {
+            border-color: #ff8c00;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .category.active {
+            background: #ff8c00;
+            border-color: #ff8c00;
+            color: #111;
+            box-shadow: 0 8px 25px rgba(255, 140, 0, .25);
+        }
+
+        /* GRIGLIA PRODOTTI */
+
+        .products-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .store-product {
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(145deg, #171717, #0c0c0c);
+            border: 1px solid #252529;
+            border-radius: 18px;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: .25s;
+        }
+
+        .store-product:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 140, 0, .65);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, .35);
+        }
+
+        .product-icon {
+            font-size: 55px;
+            margin: 10px 0;
+        }
+
+        .product-name {
+            font-size: 23px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            min-height: 45px;
+            color: #999;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        .product-price {
+            font-size: 27px;
+            color: #ff8c00;
+            font-weight: 900;
+            margin-bottom: 18px;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 5px 9px;
+            border-radius: 7px;
+            background: #ff8c00;
+            color: #111;
+            font-size: 10px;
+            font-weight: 900;
+        }
+
+        /* PULSANTI */
+
+        .product-actions {
+            display: grid;
+            gap: 10px;
+        }
+
+        .buy-button,
+        .preview-button {
+            width: 100%;
+            padding: 13px;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: .25s;
+        }
+
+        .buy-button {
+            border: none;
+            background: #ff8c00;
+            color: #111;
+        }
+
+        .buy-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 140, 0, .25);
+        }
+
+        .buy-button:disabled {
+            background: #303030;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        .preview-button {
+            background: #181818;
+            border: 1px solid #383838;
+            color: #fff;
+        }
+
+        .preview-button:hover {
+            border-color: #ff8c00;
+            color: #ffad42;
+        }
+
+        /* SICUREZZA */
+
+        .shop-security {
+            max-width: 800px;
+            margin: 50px auto 0;
+            padding: 22px;
+            text-align: center;
+            border: 1px solid #252529;
+            background: rgba(255, 255, 255, .02);
+            border-radius: 14px;
+            color: #999;
+            line-height: 1.7;
+        }
+
+        .shop-security strong {
+            color: #ddd;
+        }
+
+        /* ANTEPRIMA */
+
+        .product-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            padding: 20px;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, .85);
+        }
+
+        .product-modal.open {
+            display: flex;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 430px;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 30px;
+            border: 1px solid #75420c;
+            border-radius: 18px;
+            background: #151515;
+            text-align: center;
+            box-shadow: 0 20px 70px #000;
+        }
+
+        .modal-icon {
+            font-size: 55px;
+        }
+
+        .modal-content h2 {
+            color: #ff8c00;
+        }
+
+        .modal-content p {
+            color: #bbb;
+            line-height: 1.8;
+            white-space: pre-line;
+        }
+
+        .modal-price {
+            margin: 20px 0;
+            color: #ff8c00;
+            font-size: 26px;
+            font-weight: 900;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 8px;
+            right: 14px;
+            border: none;
+            background: transparent;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 30px 20px;
+            border-top: 1px solid #222;
+            text-align: center;
+            color: #999;
+        }
+
+        .footer-logo {
+            color: #fff;
+            font-size: 21px;
+            font-weight: 900;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: #ff8c00;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 950px) {
+            .products-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .shop-page {
+                padding: 45px 15px 80px;
+            }
+
+            .shop-header h1 {
+                font-size: 34px;
+            }
+
+            .shop-icon {
+                font-size: 52px;
+            }
+
+            .categories {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 7px;
+            }
+
+            .category {
+                width: 100%;
+                padding: 12px 5px;
+                font-size: 12px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .store-product {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+        <div class="logo">
+            🎃 <span>ThunderMC</span>
+        </div>
+
+        <nav>
+            <a href="index.html">Home 🏠</a>
+            <a href="shop.html" class="active">Store 🛒</a>
+            <a href="regolamento.html">Regolamento 📜</a>
+            <a href="candidature.html">Candidature 📝</a>
+        </nav>
+
+        <a href="login.html" class="login-btn">👤 Accedi</a>
+    </header>
+
+    <!-- STORE -->
+
+    <main class="shop-page">
+
+        <section class="shop-header">
+            <div class="shop-icon">💸</div>
+            <h1>THUNDERMC <span>STORE</span></h1>
+            <p>
+                Acquista rank, bundle e key per migliorare
+                la tua esperienza su ThunderMC.
+            </p>
+        </section>
+
+        <!-- SOLO TRE CATEGORIE -->
+
+        <div class="categories">
+            <button class="category active" data-category="vip">👑 VIP</button>
+            <button class="category" data-category="bundle">🎁 BUNDLE</button>
+            <button class="category" data-category="key">🔑 KEY</button>
+        </div>
+
+        <!-- PRODOTTI -->
+
+        <section class="products-grid" id="products">
+
+            <!-- VIP -->
+
+            <article class="store-product" data-category="vip">
+                <span class="product-badge">POPOLARE</span>
+                <div class="product-icon">🍄</div>
+                <div class="product-name">Fungo</div>
+                <div class="product-description">
+                    Rank VIP Fungo per il tuo account ThunderMC.
+                </div>
+                <div class="product-price">€8,50</div>
+                <div class="product-actions">
+                    <button class="buy-button" onclick="acquista('Fungo','8.50')">🛒 ACQUISTA</button>
+                    <button class="preview-button" onclick="previewProdotto('Fungo','🍄','Rank VIP Fungo per il tuo account ThunderMC.','8,50 €')">👁️ PREVIEW</button>
+                </div>
+            </article>
+
+            <article class="store-product" data-category="vip">
+                <div class="product-icon">💠</div>
+                <div class="product-name">Abisso</div>
+                <div class="product-description">
+                    Rank Abisso per il tuo account ThunderMC.
+                </div>
+                <div class="product-price">€15,00</div>
+                <div class="product-actions">
+                    <button class="buy-button" onclick="acquista('Abisso','15.00')">🛒 ACQUISTA</button>
+                    <button class="preview-button" onclick="previewProdotto('Abisso','💠','Rank Abisso per il tuo account ThunderMC.','15,00 €')">👁️ PREVIEW</button>
+                </div>
+            </article>
+
+            <article class="store-product" data-category="vip">
+                <div class="product-icon">🗿</div>
+                <div class="product-name">Titan</div>
+                <div class="product-description">
+                    Rank Titan per il tuo account ThunderMC.
+                </div>
+                <div class="product-price">€20,00</div>
+                <div class="product-actions">
+                    <button class="buy-button" onclick="acquista('Titan','20.00')">🛒 ACQUISTA</button>
+                    <button class="preview-button" onclick="previewProdotto('Titan','🗿','Rank Titan per il tuo account ThunderMC.','20,00 €')">👁️ PREVIEW</button>
+                </div>
+            </article>
+
+            <article class="store-product" data-category="vip">
+                <div class="product-icon">🧙</div>
+                <div class="product-name">Stregone</div>
+                <div class="product-description">
+                    Rank Stregone per il tuo account ThunderMC.
+                </div>
+                <div class="product-price">€35,00</div>
+                <div class="product-actions">
+                    <button class="buy-button" onclick="acquista('Stregone','35.00')">🛒 ACQUISTA</button>
+                    <button class="preview-button" onclick="previewProdotto('Stregone','🧙','Rank Stregone per il tuo account ThunderMC.','35,00 €')">👁️ PREVIEW</button>
+                </div>
+            </article>
+
+            <article class="store-product" data-category="vip">
+                <span class="product-badge">TOP</span>
+                <div class="product-icon">⚡</div>
+                <div class="product-name">Zeus</div>
+                <div class="product-description">
+                    Il rank più prestigioso di ThunderMC.
+                </div>
+                <div class="product-price">€50,00</div>
+                <div class="product-actions">
+                    <button class="buy-button" onclick="acquista('Zeus','50.00')">🛒 ACQUISTA</button>
+                    <button class="preview-button" onclick="previewProdotto('Zeus','⚡','Il rank più prestigioso di ThunderMC.','50,00 €')">👁️ PREVIEW</button>
+                </div>
+            </article>
+
+            <!-- BUNDLE -->
+
+            <article class="store-product" data-category="bundle">
+                <span class="product-badge">BEST SELLER</span>
+                <div class="product-icon">👹</div>
+                <div class="product-name">Bundle God</div>
+                <div class="product-description">
+                    Ottieni ben <strong>10 Key God</strong>
+                    in un unico bundle.
+                </div>
+                <div class="product-price">€54,00</div>
+                <div class="product-actions">
+                    <button class="buy-button" onclick="acquista('Bundle God - 10 Key God','54.00')">🛒 ACQUISTA</button>
+                    <button class="preview-button" onclick="previewProdotto('Bundle God','👹','Contiene 10 Key God.','54,00 €')">👁️ PREVIEW</button>
+                </div>
+            </article>
+
+            <article class="store-product" data-category="bundle">
+                <span class="product-badge">OFFERTA</span>
+                <div class="product-icon">💎</div>
+                <div class="product-name">Bundle Raro</div>
+                <div class="product-description">
+                    8 Key Rara<br>
+                    2 Key Supreme<br>
+                    4 Key Forniture<br>
+                    Piccone Drago<br>
+                    Gemma Rossa<br>
+                    Mazza della Gloria<br>
+                    45 di credito shop
+                </div>
+                <div class="product-price">€15,00</div>
+                <div class="product-actions">
+                    <button class="buy-button" onclick="acquista('Bundle Raro','15.00')">🛒 ACQUISTA</button>
+                    <button class="preview-button" onclick="previewProdotto('Bundle Raro','💎','8 Key Rara, 2 Key Supreme, 4 Key Forniture, Piccone Drago, Gemma Rossa, Mazza della Gloria e 45 di credito shop.','15,00 €')">👁️ PREVIEW</button>
+                </div>
+            </article>
+
+            <article class="store-product" data-category="bundle">
+                <div class="product-icon">🎃</div>
+                <div class="product-name">Bundle Halloween</div>
+                <div class="product-description">
+                    Un bundle a tema Halloween con ricompense speciali.
+                </div>
+                <div class="product-price">€20,00</div>
+                <div class="product-actions">
+                    <button class="buy-button" onclick="acquista('Bundle Halloween','20.00')">🛒 ACQUISTA</button>
+                    <button class="preview-button" onclick="previewProdotto('Bundle Halloween','🎃','Bundle a tema Halloween con ricompense speciali.','20,00 €')">👁️ PREVIEW</button>
+                </div>
+            </article>
+
+            <article class="store-product" data-category="bundle">
+                <div class="product-icon">₿</div>
+                <div class="product-name">Bundle Crypto</div>
+                <div class="product-description">
+                    Un bundle esclusivo per i giocatori di ThunderMC.
+                </div>
+                <div class="product-price">€35,00</div>
+                <div class="product-actions">
+                    <button class="buy-button" onclick="acquista('Bundle Crypto','35.00')">🛒 ACQUISTA</button>
+                    <button class="preview-button" onclick="previewProdotto('Bundle Crypto','₿','Bundle esclusivo per i giocatori di ThunderMC.','35,00 €')">👁️ PREVIEW</button>
+                </div>
+            </article>
+
+            <article class="store-product" data-category="bundle">
+                <span class="product-badge">LEGENDARY</span>
+                <div class="product-icon">👑</div>
+                <div class="product-name">Bundle Leggendario</div>
+                <div class="product-description">
+                    Un bundle leggendario con ricompense esclusive.
+                </div>
+                <div class="product-price">€50,00</div>
+                <div class="product-actions">
+                    <button class="buy-button" onclick="acquista('Bundle Leggendario','50.00')">🛒 ACQUISTA</button>
+                    <button class="preview-button" onclick="previewProdotto('Bundle Leggendario','👑','Bundle leggendario con ricompense esclusive.','50,00 €')">👁️ PREVIEW</button>
+                </div>
+            </article>
+
+            <!-- KEY -->
+
+            <article class="store-product" data-category="key">
+                <div class="product-icon">🐉</div>
+                <div class="product-name">Key Drago</div>
+                <div class="product-description">
+                    Una Key Drago con ricompense speciali.
+                </div>
+                <div class="product-price">PREZZO DA DEFINIRE</div>
+                <div class="product-actions">
+                    <button class="buy-button" disabled>⏳ PRESTO DISPONIBILE</button>
+                </div>
+            </article>
+
+            <article class="store-product" data-category="key">
+                <div class="product-icon">💀</div>
+                <div class="product-name">Key Xeno</div>
+                <div class="product-description">
+                    Una Key Xeno con ricompense esclusive.
+                </div>
+                <div class="product-price">€5,00</div>
+                <div class="product-actions">
+                    <button class="buy-button" onclick="acquista('Key Xeno','5.00')">🛒 ACQUISTA</button>
+                </div>
+            </article>
+
+            <article class="store-product" data-category="key">
+                <span class="product-badge">RARA</span>
+                <div class="product-icon">⚡</div>
+                <div class="product-name">Key God</div>
+                <div class="product-description">
+                    La Key God con ricompense di alto livello.
+                </div>
+                <div class="product-price">€8,00</div>
+                <div class="product-actions">
+                    <button class="buy-button" onclick="acquista('Key God','8.00')">🛒 ACQUISTA</button>
+                </div>
+            </article>
+
+            <article class="store-product" data-category="key">
+                <span class="product-badge">SPECIALE</span>
+                <div class="product-icon">👻</div>
+                <div class="product-name">Key Ghost</div>
+                <div class="product-description">
+                    Una Key Ghost con ricompense misteriose.
+                </div>
+                <div class="product-price">PREZZO DA DEFINIRE</div>
+                <div class="product-actions">
+                    <button class="buy-button" disabled>⏳ PRESTO DISPONIBILE</button>
+                </div>
+            </article>
+
+        </section>
+
+        <!-- SICUREZZA -->
+
+        <div class="shop-security">
+            🔒 <strong>Acquisti sicuri</strong>
+            <br>
+            I pagamenti dovranno essere elaborati tramite un sistema sicuro.
+            ThunderMC non deve memorizzare i dati della tua carta.
+        </div>
+
+    </main>
+
+    <!-- FINESTRA PREVIEW -->
+
+    <div class="product-modal" id="productModal"
+         role="dialog" aria-modal="true"
+         aria-labelledby="modalTitle">
+
+        <div class="modal-content">
+            <button class="modal-close"
+                    onclick="chiudiPreview()"
+                    aria-label="Chiudi">×</button>
+
+            <div class="modal-icon" id="modalIcon">🎁</div>
+            <h2 id="modalTitle">Anteprima prodotto</h2>
+            <p id="modalDescription"></p>
+            <div class="modal-price" id="modalPrice"></div>
+
+            <button class="buy-button" onclick="chiudiPreview()">
+                CONTINUA A ESPLORARE
+            </button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+
+    <footer>
+        <div class="footer-logo">🎃 ThunderMC</div>
+        <p>© 2026 ThunderMC. Tutti i diritti riservati.</p>
+
+        <div class="footer-links">
+            <a href="regolamento.html">Regolamento</a>
+            <a href="contatti.html">Contatti</a>
+            <a href="privacy.html">Privacy</a>
+        </div>
+    </footer>
+
+    <!-- SCRIPT -->
+
+    <script>
+        // FILTRI CATEGORIE
+        const categories = document.querySelectorAll(".category");
+        const products = document.querySelectorAll(".store-product");
+
+        function filtraProdotti(categoriaSelezionata) {
+            products.forEach(product => {
+                product.style.display =
+                    product.dataset.category === categoriaSelezionata
+                        ? ""
+                        : "none";
+            });
+        }
+
+        categories.forEach(category => {
+            category.addEventListener("click", () => {
+                categories.forEach(button =>
+                    button.classList.remove("active")
+                );
+
+                category.classList.add("active");
+                filtraProdotti(category.dataset.category);
+            });
+        });
+
+        // MOSTRA VIP ALL'APERTURA
+        filtraProdotti("vip");
+
+        // ACQUISTA
+        function acquista(prodotto, prezzo) {
+            const importo = Number(prezzo);
+
+            if (!Number.isFinite(importo) || importo <= 0) {
+                alert(
+                    "🎃 ThunderMC Store\n\n" +
+                    "Il prezzo di questo prodotto deve ancora essere configurato."
+                );
+                return;
+            }
+
+            const parametri = new URLSearchParams({
+                prodotto: prodotto,
+                prezzo: importo.toFixed(2)
+            });
+
+            window.location.href =
+                "pagamento.html?" + parametri.toString();
+        }
+
+        // PREVIEW
+        function previewProdotto(nome, icona, descrizione, prezzo) {
+            document.getElementById("modalTitle").textContent = nome;
+            document.getElementById("modalIcon").textContent = icona;
+            document.getElementById("modalDescription").textContent = descrizione;
+            document.getElementById("modalPrice").textContent = prezzo;
+
+            document.getElementById("productModal").classList.add("open");
+        }
+
+        // CHIUSURA PREVIEW
+        function chiudiPreview() {
+            document.getElementById("productModal").classList.remove("open");
+        }
+
+        document.getElementById("productModal").addEventListener("click", event => {
+            if (event.target.id === "productModal") {
+                chiudiPreview();
+            }
+        });
+
+        document.addEventListener("keydown", event => {
+            if (event.key === "Escape") {
+                chiudiPreview();
+            }
+        });
+    </script>
+
+</body>
+</html>
+

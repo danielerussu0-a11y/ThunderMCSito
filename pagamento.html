@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090909">
+  <title>Pagamento | ThunderMC 🎃</title>
+
+  <style>
+    :root {
+      --orange: #ff8c00;
+      --gold: #ffd166;
+      --bg: #090909;
+      --panel: #141414;
+      --muted: #a5a5a5;
+      --line: #30251a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: #fff;
+      background:
+        radial-gradient(ellipse at 50% 0%, #38200b 0%, transparent 45%),
+        var(--bg);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button, a { font-family: inherit; }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 6%;
+      border-bottom: 1px solid #292018;
+      background: #090909ef;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 900;
+    }
+
+    .logo span { color: var(--orange); }
+
+    .nav-link {
+      color: #ddd;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .nav-link:hover { color: var(--orange); }
+
+    .container {
+      width: min(1050px, 100%);
+      margin: auto;
+      padding: 48px 18px 70px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .hero-icon {
+      font-size: 57px;
+      filter: drop-shadow(0 0 18px #ff8c0070);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .eyebrow {
+      color: var(--orange);
+      font-weight: 900;
+      font-size: 11px;
+      letter-spacing: 4px;
+      margin-top: 10px;
+    }
+
+    h1 {
+      font-size: clamp(32px, 7vw, 52px);
+      margin: 12px 0;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    h1 span { color: var(--orange); }
+
+    .hero p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin: auto;
+      max-width: 500px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .panel {
+      background: linear-gradient(145deg, #191919, #101010);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 18px 50px #0005;
+    }
+
+    .panel-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
+      font-weight: 900;
+      margin: 0 0 22px;
+    }
+
+    .panel-title span { color: var(--orange); }
+
+    .product {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px;
+      border: 1px solid #3a2918;
+      border-radius: 16px;
+      background: radial-gradient(circle at top left, #35200d, #171717 75%);
+    }
+
+    .product-icon {
+      flex-shrink: 0;
+      width: 76px;
+      height: 76px;
+      display: grid;
+      place-items: center;
+      border-radius: 17px;
+      border: 1px solid #75440f;
+      background: #21160c;
+      font-size: 43px;
+      box-shadow: inset 0 0 20px #ff8c0010;
+    }
+
+    .product-details { flex: 1; min-width: 0; }
+
+    .product-label {
+      color: var(--orange);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      margin-bottom: 7px;
+    }
+
+    .product-name {
+      font-size: 20px;
+      font-weight: 900;
+      overflow-wrap: anywhere;
+    }
+
+    .product-description {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+      margin-top: 7px;
+    }
+
+    .price {
+      color: var(--gold);
+      font-size: 23px;
+      font-weight: 900;
+      white-space: nowrap;
+      margin-top: 15px;
+    }
+
+    .divider {
+      height: 1px;
+      background: #303030;
+      margin: 22px 0;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin: 17px 0;
+      font-size: 14px;
+    }
+
+    .row span { color: var(--muted); }
+
+    .row strong {
+      text-align: right;
+      overflow-wrap: anywhere;
+    }
+
+    .total {
+      align-items: center;
+      padding-top: 19px;
+      border-top: 1px solid #393026;
+    }
+
+    .total span {
+      color: #fff;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .total strong {
+      color: var(--orange);
+      font-size: 29px;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px;
+      margin-top: 22px;
+      border-radius: 12px;
+      border: 1px solid #72500c;
+      background: #2b200a;
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 12px #ffd16680;
+    }
+
+    .info {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+      margin: 17px 0 0;
+    }
+
+    .info strong { color: #ddd; }
+
+    .payment-card { margin-bottom: 20px; }
+
+    .payment-option {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      border: 1px solid #333;
+      border-radius: 13px;
+      padding: 15px;
+      background: #111;
+      margin-bottom: 18px;
+    }
+
+    .paypal-logo {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .payment-option strong { display: block; }
+
+    .payment-option small {
+      display: block;
+      color: var(--muted);
+      margin-top: 5px;
+      line-height: 1.5;
+    }
+
+    .btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 9px;
+      width: 100%;
+      min-height: 49px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .btn:hover:not(.disabled) {
+      transform: translateY(-2px);
+      filter: brightness(1.06);
+    }
+
+    .btn-pay {
+      color: #003087;
+      background: #ffc439;
+      border: 1px solid #f2b928;
+    }
+
+    .btn-pay img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+    }
+
+    .btn.disabled {
+      opacity: .4;
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+
+    .btn-download {
+      color: #17100a;
+      background: linear-gradient(100deg, #ff8c00, #ffd166);
+      border: 0;
+      box-shadow: 0 8px 25px #ff8c0025;
+    }
+
+    .btn-secondary {
+      color: #eee;
+      background: #1b1b1b;
+      border: 1px solid #383838;
+      margin-top: 10px;
+    }
+
+    .receipt-preview {
+      margin-top: 20px;
+      padding: 17px;
+      background: #0b0b0b;
+      border: 1px dashed #674016;
+      border-radius: 13px;
+    }
+
+    .receipt-brand {
+      color: var(--orange);
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    .receipt-preview p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+
+    .receipt-preview strong { color: white; }
+
+    footer {
+      border-top: 1px solid #242424;
+      text-align: center;
+      padding: 26px 15px;
+      color: #777;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    footer strong { color: #ddd; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+
+    @media (max-width: 760px) {
+      .layout { grid-template-columns: 1fr; }
+      .container { padding-top: 35px; }
+      .panel { padding: 20px; }
+      .navbar { padding: 16px; }
+    }
+
+    @media (max-width: 390px) {
+      .product { padding: 12px; gap: 11px; }
+      .product-icon { width: 57px; height: 57px; font-size: 32px; }
+      .product-name { font-size: 17px; }
+      .price { font-size: 20px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="logo">🎃 <span>ThunderMC</span></div>
+    <a class="nav-link" href="shop.html">← Torna allo Store</a>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-icon">🎃</div>
+      <div class="eyebrow">HALLOWEEN EDITION</div>
+      <h1>THUNDER<span>MC</span> CHECKOUT</h1>
+      <p>
+        Un ultimo passo verso le tue ricompense.
+        Controlla il tuo ordine e prosegui al pagamento.
+      </p>
+    </section>
+
+    <div class="layout">
+      <section class="panel">
+        <h2 class="panel-title"><span>✦</span> RIEPILOGO ORDINE</h2>
+
+        <div class="product">
+          <div class="product-icon" id="productIcon">🎁</div>
+          <div class="product-details">
+            <div class="product-label">THUNDERMC STORE</div>
+            <div class="product-name" id="productName">Caricamento...</div>
+            <div class="product-description" id="productDescription">
+              Il tuo prodotto selezionato.
+            </div>
+            <div class="price" id="productPrice">—</div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="row">
+          <span>Numero ordine</span>
+          <strong id="orderNumber">—</strong>
+        </div>
+
+        <div class="row">
+          <span>Data ordine</span>
+          <strong id="orderDate">—</strong>
+        </div>
+
+        <div class="row">
+          <span>Metodo di pagamento</span>
+          <strong>PayPal</strong>
+        </div>
+
+        <div class="row total">
+          <span>TOTALE</span>
+          <strong id="totalPrice">—</strong>
+        </div>
+
+        <div class="status">
+          <span class="status-dot"></span>
+          <span id="paymentStatus">IN ATTESA DI PAGAMENTO</span>
+        </div>
+
+        <p class="info">
+          🔒 <strong>Importante:</strong> questo riepilogo non certifica
+          che il pagamento sia avvenuto. La conferma richiede una verifica
+          effettiva del pagamento.
+        </p>
+      </section>
+
+      <div>
+        <section class="panel payment-card">
+          <h2 class="panel-title"><span>✦</span> PAGAMENTO</h2>
+
+          <div class="payment-option">
+            <img
+              class="paypal-logo"
+              src="https://www.paypalobjects.com/webstatic/icon/pp258.png"
+              alt="Logo PayPal"
+              width="40"
+              height="40"
+            >
+            <div>
+              <strong>PayPal</strong>
+              <small>Prosegui sul sito ufficiale PayPal.Me</small>
+            </div>
+          </div>
+
+          <a
+            id="paypalButton"
+            class="btn btn-pay disabled"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-disabled="true"
+          >
+            <img
+              src="https://www.paypalobjects.com/webstatic/icon/pp258.png"
+              alt=""
+              width="30"
+              height="30"
+            >
+            CONTINUA CON PAYPAL
+          </a>
+
+          <p class="info" id="paypalMessage" aria-live="polite">
+            Controllo del prodotto in corso...
+          </p>
+        </section>
+
+        <section class="panel">
+          <h2 class="panel-title"><span>✦</span> LA TUA RICEVUTA</h2>
+
+          <div class="receipt-preview">
+            <div class="receipt-brand">🎃 THUNDERMC</div>
+            <div style="font-weight:900;margin-top:12px">
+              Riepilogo del tuo ordine
+            </div>
+            <p>
+              <span id="previewEmoji">🎁</span>
+              <strong id="previewProduct">Il tuo prodotto</strong>
+              <br>
+              Ordine: <span id="previewOrder">—</span>
+              <br>
+              Totale: <strong id="previewPrice">—</strong>
+            </p>
+          </div>
+
+          <button class="btn btn-download" id="downloadButton" type="button">
+            📥 SCARICA RICEVUTA
+          </button>
+
+          <a class="btn btn-secondary" href="shop.html">
+            🛒 CONTINUA LO SHOP
+          </a>
+
+          <p class="info">
+            Il file scaricato è un riepilogo HTML dell'ordine, non una
+            fattura fiscale né una conferma del pagamento.
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <strong>🎃 ThunderMC</strong>
+    <br>
+    © 2026 ThunderMC · Tutti i diritti riservati.
+  </footer>
+
+  <script>
+    // Il tuo account PayPal.Me.
+    const PAYPAL_ME_USERNAME = "DanieleRussu";
+
+    // Catalogo prodotti: i prezzi vengono verificati qui,
+    // non vengono presi come fonte attendibile dall'URL.
+    const catalogo = {
+      "Fungo": {
+        prezzo: 8.50,
+        emoji: "🍄",
+        descrizione: "Rank VIP Fungo per il tuo account ThunderMC."
+      },
+      "Abisso": {
+        prezzo: 15,
+        emoji: "💠",
+        descrizione: "Rank Abisso per il tuo account ThunderMC."
+      },
+      "Titan": {
+        prezzo: 20,
+        emoji: "🗿",
+        descrizione: "Rank Titan per il tuo account ThunderMC."
+      },
+      "Stregone": {
+        prezzo: 35,
+        emoji: "🧙",
+        descrizione: "Rank Stregone per il tuo account ThunderMC."
+      },
+      "Zeus": {
+        prezzo: 50,
+        emoji: "⚡",
+        descrizione: "Il rank più prestigioso di ThunderMC."
+      },
+      "Bundle God - 10 Key God": {
+        prezzo: 54,
+        emoji: "👹",
+        nomeVisualizzato: "Bundle God",
+        descrizione: "Contiene 10 Key God."
+      },
+      "Bundle Raro": {
+        prezzo: 15,
+        emoji: "💎",
+        descrizione: "8 Key Rara, 2 Key Supreme, 4 Key Forniture, Piccone Drago, Gemma Rossa, Mazza della Gloria e 45 di credito shop."
+      },
+      "Bundle Halloween": {
+        prezzo: 20,
+        emoji: "🎃",
+        descrizione: "Bundle a tema Halloween con ricompense speciali."
+      },
+      "Bundle Crypto": {
+        prezzo: 35,
+        emoji: "₿",
+        descrizione: "Bundle esclusivo per i giocatori di ThunderMC."
+      },
+      "Bundle Leggendario": {
+        prezzo: 50,
+        emoji: "👑",
+        descrizione: "Bundle leggendario con ricompense esclusive."
+      },
+      "Key Xeno": {
+        prezzo: 5,
+        emoji: "💀",
+        descrizione: "Una Key Xeno con ricompense esclusive."
+      },
+      "Key God": {
+        prezzo: 8,
+        emoji: "⚡",
+        descrizione: "La Key God con ricompense di alto livello."
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const prodotto = params.get("prodotto") || "";
+    const item = catalogo[prodotto];
+
+    const paypalButton = document.getElementById("paypalButton");
+    const paypalMessage = document.getElementById("paypalMessage");
+    const downloadButton = document.getElementById("downloadButton");
+
+    const numeroOrdine = "TM-" + Date.now().toString().slice(-10);
+
+    const dataOrdine = new Date().toLocaleString("it-IT", {
+      dateStyle: "short",
+      timeStyle: "short"
+    });
+
+    function euro(valore) {
+      return valore.toLocaleString("it-IT", {
+        style: "currency",
+        currency: "EUR"
+      });
+    }
+
+    function testoSicuro(valore) {
+      return String(valore).replace(/[&<>"']/g, carattere => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[carattere]);
+    }
+
+    document.getElementById("orderNumber").textContent = numeroOrdine;
+    document.getElementById("orderDate").textContent = dataOrdine;
+
+    function disattivaPayPal(messaggio) {
+      paypalButton.removeAttribute("href");
+      paypalButton.classList.add("disabled");
+      paypalButton.setAttribute("aria-disabled", "true");
+      paypalMessage.textContent = messaggio;
+    }
+
+    function attivaPayPal(url) {
+      paypalButton.href = url;
+      paypalButton.classList.remove("disabled");
+      paypalButton.setAttribute("aria-disabled", "false");
+      paypalMessage.textContent =
+        "Controlla il destinatario e l'importo su PayPal prima di confermare.";
+    }
+
+    if (!item) {
+      document.getElementById("productIcon").textContent = "⚠️";
+      document.getElementById("productName").textContent = "Prodotto non valido";
+      document.getElementById("productDescription").textContent =
+        "Torna allo shop e seleziona un prodotto acquistabile.";
+      document.getElementById("productPrice").textContent = "—";
+      document.getElementById("totalPrice").textContent = "—";
+      document.getElementById("paymentStatus").textContent = "ORDINE NON VALIDO";
+      document.getElementById("previewProduct").textContent = "Prodotto non valido";
+      document.getElementById("previewEmoji").textContent = "⚠️";
+      document.getElementById("previewPrice").textContent = "—";
+      document.getElementById("previewOrder").textContent = numeroOrdine;
+
+      disattivaPayPal("Prodotto non disponibile. Torna allo shop e riprova.");
+      downloadButton.disabled = true;
+    } else {
+      const nomeVisualizzato = item.nomeVisualizzato || prodotto;
+
+      document.getElementById("productIcon").textContent = item.emoji;
+      document.getElementById("productName").textContent = nomeVisualizzato;
+      document.getElementById("productDescription").textContent = item.descrizione;
+      document.getElementById("productPrice").textContent = euro(item.prezzo);
+      document.getElementById("totalPrice").textContent = euro(item.prezzo);
+
+      document.getElementById("previewEmoji").textContent = item.emoji;
+      document.getElementById("previewProduct").textContent = nomeVisualizzato;
+      document.getElementById("previewPrice").textContent = euro(item.prezzo);
+      document.getElementById("previewOrder").textContent = numeroOrdine;
+
+      const username = PAYPAL_ME_USERNAME.trim();
+
+      if (/^[a-zA-Z0-9._-]+$/.test(username)) {
+        const urlPayPal =
+          "https://www.paypal.me/" +
+          encodeURIComponent(username) +
+          "/" +
+          item.prezzo.toFixed(2);
+
+        attivaPayPal(urlPayPal);
+      } else {
+        disattivaPayPal(
+          "Configura un nome utente PayPal.Me valido per attivare il pulsante."
+        );
+      }
+    }
+
+    // Scarica un riepilogo HTML dell'ordine.
+    downloadButton.addEventListener("click", () => {
+      if (!item) return;
+
+      const nomeVisualizzato = item.nomeVisualizzato || prodotto;
+
+      const ricevuta = `<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ricevuta ${testoSicuro(numeroOrdine)} - ThunderMC</title>
+<style>
+body{margin:0;padding:24px;background:#090909;color:#fff;font-family:Arial,sans-serif}
+main{max-width:620px;margin:25px auto;padding:28px;background:#151515;border:1px solid #75420c;border-radius:20px}
+h1{color:#ff8c00}
+.brand{color:#ff8c00;font-weight:900;letter-spacing:2px}
+.row{padding:14px 0;border-bottom:1px solid #333;overflow-wrap:anywhere}
+.total{font-size:24px;color:#ffd166;font-weight:900}
+.note{color:#bbb;line-height:1.8;font-size:13px}
+</style>
+</head>
+<body>
+<main>
+<div class="brand">🎃 THUNDERMC · STORE</div>
+<h1>Riepilogo ordine</h1>
+<p class="note">HALLOWEEN EDITION</p>
+<div class="row"><b>Numero ordine:</b> ${testoSicuro(numeroOrdine)}</div>
+<div class="row"><b>Data:</b> ${testoSicuro(dataOrdine)}</div>
+<div class="row"><b>Prodotto:</b> ${testoSicuro(item.emoji)} ${testoSicuro(nomeVisualizzato)}</div>
+<div class="row"><b>Dettagli:</b> ${testoSicuro(item.descrizione)}</div>
+<div class="row total">Totale: ${testoSicuro(euro(item.prezzo))}</div>
+<div class="row"><b>Stato:</b> In attesa di verifica</div>
+<p class="note">
+Questo documento è un riepilogo dell'ordine, non una fattura fiscale
+e non conferma l'avvenuto pagamento. Il pagamento deve essere verificato
+separatamente tramite il fornitore di pagamento.
+</p>
+<p class="note">© 2026 ThunderMC · Tutti i diritti riservati.</p>
+</main>
+</body>
+</html>`;
+
+      const blob = new Blob([ricevuta], {
+        type: "text/html;charset=utf-8"
+      });
+
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+
+      link.href = url;
+      link.download = "Ricevuta-" + numeroOrdine + ".html";
+
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+    });
+  </script>
+</body>
+</html>
