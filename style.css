@@ -1,0 +1,1063 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
+
+/* =====================================
+   ⚡ THUNDERMC - STILE GIALLO
+===================================== */
+
+:root {
+    --orange: #FFD700;
+    --orange-light: #FFEA70;
+    --gold: #FFC107;
+
+    --dark: #080808;
+    --dark-2: #111111;
+    --dark-3: #181818;
+
+    --text: #ffffff;
+    --gray: #a5a5a5;
+
+    --border: rgba(255, 215, 0, .2);
+    --shadow: 0 15px 40px rgba(0, 0, 0, .4);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+    background:
+        radial-gradient(circle at top, #262000 0%, #080808 45%);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+a {
+    transition: .3s;
+}
+
+/* =====================================
+   ⚡ NAVBAR
+===================================== */
+
+.navbar {
+    width: 100%;
+    min-height: 80px;
+    padding: 15px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: rgba(8, 8, 8, .95);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: var(--orange);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+nav a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+nav a:hover,
+nav a.active {
+    color: var(--orange);
+    text-shadow: 0 0 12px rgba(255, 215, 0, .3);
+}
+
+.login-btn {
+    padding: 11px 20px;
+    border-radius: 8px;
+    background: var(--orange);
+    color: #111;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(255, 215, 0, .4);
+}
+
+/* =====================================
+   ⚡ HOME - HERO
+===================================== */
+
+.hero {
+    min-height: 650px;
+    padding: 80px 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: rgba(255, 215, 0, .1);
+    filter: blur(100px);
+    border-radius: 50%;
+    left: -150px;
+    top: 100px;
+}
+
+.hero-content {
+    max-width: 700px;
+    position: relative;
+    z-index: 2;
+}
+
+.badge {
+    display: inline-block;
+    padding: 8px 15px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 215, 0, .4);
+    border-radius: 50px;
+    color: var(--orange-light);
+    background: rgba(255, 215, 0, .08);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.hero h1 {
+    font-size: clamp(45px, 7vw, 82px);
+    line-height: .95;
+    font-weight: 700;
+}
+
+.hero h1 span {
+    color: var(--orange);
+    display: block;
+    text-shadow: 0 0 20px rgba(255, 215, 0, .35);
+}
+
+.hero p {
+    margin-top: 25px;
+    max-width: 600px;
+    color: var(--gray);
+    font-size: 19px;
+    line-height: 1.6;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 35px;
+}
+
+.primary-btn,
+.secondary-btn {
+    padding: 15px 28px;
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.primary-btn {
+    border: none;
+    background: var(--orange);
+    color: #111;
+}
+
+.primary-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 35px rgba(255, 215, 0, .35);
+}
+
+.secondary-btn {
+    border: 1px solid #444;
+    color: white;
+    background: rgba(255, 255, 255, .03);
+}
+
+.secondary-btn:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+}
+
+.server-ip {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.server-ip span {
+    color: #777;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.server-ip strong {
+    color: var(--orange-light);
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+
+/* =====================================
+   ⚡ ICONA ANIMATA
+===================================== */
+
+.hero-pumpkin {
+    font-size: 220px;
+    filter: drop-shadow(0 0 30px rgba(255, 215, 0, .35));
+    animation: floating 4s ease-in-out infinite;
+    user-select: none;
+}
+
+@keyframes floating {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* =====================================
+   📊 SERVER STATUS
+===================================== */
+
+.status-section {
+    padding: 30px 8% 80px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.status-card {
+    padding: 25px;
+    background: rgba(255, 255, 255, .03);
+    border: 1px solid #252525;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    transition: .3s;
+}
+
+.status-card:hover {
+    border-color: var(--border);
+    transform: translateY(-4px);
+}
+
+.status-icon {
+    width: 55px;
+    height: 55px;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 215, 0, .1);
+    border-radius: 12px;
+    font-size: 25px;
+}
+
+.status-card span {
+    color: #777;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.status-card h3 {
+    margin-top: 4px;
+    font-size: 23px;
+}
+
+/* =====================================
+   🏰 ABOUT E FEATURES
+===================================== */
+
+.about {
+    padding: 90px 8%;
+    background: #0d0d0d;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-title span {
+    font-size: 35px;
+}
+
+.section-title h2 {
+    margin-top: 10px;
+    font-size: 40px;
+}
+
+.section-title p {
+    margin-top: 10px;
+    color: var(--gray);
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.feature-card {
+    padding: 35px;
+    text-align: center;
+    background: #111;
+    border: 1px solid #242424;
+    border-radius: 15px;
+    transition: .3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--orange);
+}
+
+.feature-icon {
+    font-size: 45px;
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    color: var(--gray);
+    line-height: 1.6;
+}
+
+/* =====================================
+   ⚡ CALL TO ACTION
+===================================== */
+
+.cta {
+    padding: 100px 8%;
+    text-align: center;
+}
+
+.cta > div {
+    max-width: 850px;
+    margin: auto;
+    padding: 70px 30px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: radial-gradient(
+        circle at center,
+        rgba(255, 215, 0, .1),
+        transparent 70%
+    );
+}
+
+.cta span {
+    color: var(--orange);
+    font-weight: 700;
+}
+
+.cta h2 {
+    margin-top: 15px;
+    font-size: 42px;
+}
+
+.cta h2 strong {
+    color: var(--orange);
+}
+
+.cta p {
+    color: var(--gray);
+    margin: 15px 0 30px;
+}
+
+/* =====================================
+   🛒 STORE - CATEGORIE
+===================================== */
+
+.categories {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 35px auto;
+    max-width: 1100px;
+}
+
+.category {
+    padding: 13px 22px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #111;
+    color: #aaa;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.category:hover {
+    color: #fff;
+    border-color: var(--orange);
+    transform: translateY(-2px);
+}
+
+.category.active {
+    background: var(--orange);
+    color: #111;
+    border-color: var(--orange);
+    box-shadow: 0 0 20px rgba(255, 215, 0, .25);
+}
+
+/* =====================================
+   🎁 GRIGLIA PRODOTTI
+===================================== */
+
+.products-grid {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.store-product {
+    background: linear-gradient(145deg, #191919, #0a0a0a);
+    border: 1px solid rgba(255, 215, 0, .16);
+    border-radius: 20px;
+    padding: 28px 22px;
+    text-align: center;
+    transition: .25s;
+}
+
+.store-product:hover {
+    transform: translateY(-7px);
+    border-color: rgba(255, 215, 0, .65);
+    box-shadow: var(--shadow);
+}
+
+.product-icon {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 22px;
+    background: rgba(255, 215, 0, .08);
+    border: 1px solid var(--border);
+    font-size: 48px;
+    transition: .25s;
+}
+
+.store-product:hover .product-icon {
+    transform: scale(1.08) rotate(-2deg);
+    background: rgba(255, 215, 0, .13);
+}
+
+.product-name {
+    color: #fff;
+    font-size: 23px;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.product-description {
+    min-height: 48px;
+    color: #999;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 18px;
+}
+
+.product-price {
+    color: var(--orange);
+    font-size: 25px;
+    font-weight: 900;
+    margin-bottom: 18px;
+}
+
+.buy-button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 11px;
+    background: var(--orange);
+    color: #111;
+    font-size: 15px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.buy-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, .25);
+}
+
+/* =====================================
+   💳 PAGAMENTO
+===================================== */
+
+.container {
+    width: min(1050px, 100%);
+    margin: auto;
+    padding: 48px 18px 70px;
+}
+
+.container .hero {
+    min-height: auto;
+    padding: 0;
+    margin-bottom: 40px;
+    display: block;
+    text-align: center;
+    overflow: visible;
+}
+
+.container .hero::before {
+    display: none;
+}
+
+.container .hero h1 {
+    font-size: clamp(32px, 7vw, 52px);
+    margin: 12px 0;
+}
+
+.container .hero h1 span {
+    display: inline;
+}
+
+.container .hero p {
+    margin: auto;
+    max-width: 500px;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap: 22px;
+    align-items: start;
+}
+
+.panel {
+    background: linear-gradient(145deg, #191919, #101010);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+}
+
+.panel-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 21px;
+    font-weight: 900;
+    margin: 0 0 22px;
+}
+
+.panel-title span {
+    color: var(--orange);
+}
+
+/* =====================================
+   📦 RIEPILOGO PRODOTTO
+===================================== */
+
+.product {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px;
+    border: 1px solid #554600;
+    border-radius: 16px;
+    background: radial-gradient(
+        circle at top left,
+        #332b08,
+        #171717 75%
+    );
+}
+
+.product-icon {
+    flex-shrink: 0;
+    width: 76px;
+    height: 76px;
+    display: grid;
+    place-items: center;
+    border-radius: 17px;
+    border: 1px solid #8a7200;
+    background: #211c08;
+    font-size: 43px;
+}
+
+.product-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.product-label {
+    color: var(--orange);
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 7px;
+}
+
+.product-name {
+    font-size: 23px;
+    font-weight: 900;
+    overflow-wrap: anywhere;
+}
+
+.product-description {
+    color: var(--gray);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-top: 7px;
+}
+
+.price {
+    color: var(--gold);
+    font-size: 27px;
+    font-weight: 900;
+    margin-top: 15px;
+}
+
+.divider {
+    height: 1px;
+    background: #303030;
+    margin: 22px 0;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin: 17px 0;
+    font-size: 16px;
+}
+
+.row span {
+    color: var(--gray);
+}
+
+.row strong {
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.total {
+    align-items: center;
+    padding-top: 19px;
+    border-top: 1px solid #393026;
+}
+
+.total span {
+    color: #fff;
+    font-size: 19px;
+    font-weight: 900;
+}
+
+.total strong {
+    color: var(--orange);
+    font-size: 29px;
+}
+
+/* =====================================
+   🟡 STATO PAGAMENTO
+===================================== */
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px;
+    margin-top: 22px;
+    border-radius: 12px;
+    border: 1px solid #725f0c;
+    background: #2b260a;
+    color: var(--gold);
+    font-size: 14px;
+    font-weight: 900;
+}
+
+.status-dot {
+    width: 9px;
+    height: 9px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 12px #ffd16680;
+}
+
+.info {
+    color: var(--gray);
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 17px 0 0;
+}
+
+.info strong {
+    color: #ddd;
+}
+
+/* =====================================
+   💙 PAYPAL
+===================================== */
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    border: 1px solid #333;
+    border-radius: 13px;
+    padding: 15px;
+    background: #111;
+    margin-bottom: 18px;
+}
+
+.paypal-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.payment-option strong {
+    display: block;
+    font-size: 18px;
+}
+
+.payment-option small {
+    display: block;
+    color: var(--gray);
+    margin-top: 5px;
+    line-height: 1.5;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    min-height: 49px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.btn:hover:not(.disabled):not(:disabled) {
+    transform: translateY(-2px);
+    filter: brightness(1.06);
+}
+
+.btn-pay {
+    color: #003087;
+    background: #ffc439;
+    border: 1px solid #f2b928;
+}
+
+.btn-pay img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.btn.disabled {
+    opacity: .4;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.btn-download {
+    color: #17100a;
+    background: linear-gradient(100deg, #FFD700, #FFEA70);
+    border: 0;
+    box-shadow: 0 8px 25px #ffd70025;
+    margin-top: 15px;
+}
+
+.btn-download:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    color: #eee;
+    background: #1b1b1b;
+    border: 1px solid #383838;
+    margin-top: 10px;
+}
+
+.btn-secondary:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+}
+
+/* =====================================
+   🧾 RICEVUTA
+===================================== */
+
+.receipt-preview {
+    margin-top: 20px;
+    padding: 17px;
+    background: #0b0b0b;
+    border: 1px dashed #8a7200;
+    border-radius: 13px;
+}
+
+.receipt-brand {
+    color: var(--orange);
+    font-weight: 900;
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+.receipt-preview p {
+    color: var(--gray);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 0;
+}
+
+.receipt-preview strong {
+    color: white;
+}
+
+/* =====================================
+   📜 FOOTER
+===================================== */
+
+footer {
+    padding: 40px 8%;
+    background: #050505;
+    text-align: center;
+    border-top: 1px solid #1c1c1c;
+    color: #777;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+footer strong {
+    color: var(--orange);
+}
+
+.footer-logo {
+    font-size: 25px;
+    font-weight: 700;
+    color: var(--orange);
+}
+
+footer p {
+    margin-top: 10px;
+    color: #666;
+}
+
+.footer-links {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-links a {
+    color: #888;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: var(--orange);
+}
+
+/* =====================================
+   📱 RESPONSIVE
+===================================== */
+
+@media (max-width: 900px) {
+    .navbar {
+        min-height: auto;
+        padding: 20px;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .navbar nav {
+        width: 100%;
+        order: 3;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .hero {
+        padding: 70px 6%;
+        text-align: center;
+    }
+
+    .hero-content {
+        margin: auto;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .hero-pumpkin {
+        display: none;
+    }
+
+    .server-ip {
+        align-items: center;
+    }
+
+    .status-section,
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+    .products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .section-title h2,
+    .cta h2 {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar nav {
+        gap: 12px;
+    }
+
+    .navbar nav a {
+        font-size: 14px;
+    }
+
+    .login-btn {
+        display: none;
+    }
+
+    .hero h1 {
+        font-size: 48px;
+    }
+
+    .categories {
+        padding: 0 15px;
+        gap: 8px;
+    }
+
+    .category {
+        flex: 1 1 calc(50% - 8px);
+        padding: 12px 8px;
+        font-size: 13px;
+    }
+
+    .products-grid {
+        grid-template-columns: 1fr;
+        padding: 15px;
+    }
+
+    .store-product {
+        padding: 25px 20px;
+    }
+
+    .container {
+        padding: 35px 13px 50px;
+    }
+
+    .panel {
+        padding: 19px;
+    }
+
+    .product {
+        padding: 12px;
+        gap: 11px;
+    }
+
+    .product-icon {
+        width: 57px;
+        height: 57px;
+        font-size: 32px;
+    }
+
+    .product-name {
+        font-size: 19px;
+    }
+
+    .price {
+        font-size: 22px;
+    }
+
+    .row {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 390px) {
+    .navbar nav {
+        gap: 9px;
+    }
+
+    .navbar nav a {
+        font-size: 13px;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+}
+
